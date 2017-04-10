@@ -1,0 +1,1 @@
+test: ; vendor/bin/phpunit
