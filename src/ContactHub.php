@@ -18,6 +18,10 @@ class ContactHub
         return new static(new GuzzleApiClient($token, $workspaceId));
     }
 
+    /**
+     * @param string $nodeId
+     * @return Paginated
+     */
     public function getCustomers($nodeId)
     {
         return $this->apiClient->get('customers', ['nodeId' => $nodeId]);

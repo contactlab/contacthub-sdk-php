@@ -23,8 +23,12 @@ class GuzzleApiClient implements ApiClient
 
     public function get($path, array $params)
     {
-        $response = $this->guzzle->request('GET', $this->url($path), ['query' => $params]);
-        return (string) $response->getBody();
+        try {
+            $response = $this->guzzle->request('GET', $this->url($path), ['query' => $params]);
+            return json_decode((string) $response->getBody(), true);
+        } catch (\Exception $e) {
+            throw new Exception(json_decode((string) $e->getResponse()->getBody(), true));
+        }
     }
 
     private function url($path)
