@@ -2,6 +2,8 @@
 namespace ContactHub;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\TransferException;
 
 class GuzzleApiClient implements ApiClient
 {
@@ -21,13 +23,15 @@ class GuzzleApiClient implements ApiClient
         ]);
     }
 
-    public function get($path, array $params)
+    public function get($path, array $params = [])
     {
         try {
             $response = $this->guzzle->request('GET', $this->url($path), ['query' => $params]);
             return json_decode((string) $response->getBody(), true);
-        } catch (\Exception $e) {
-            throw new Exception(json_decode((string) $e->getResponse()->getBody(), true));
+        } catch (ClientException $e) {
+            throw Exception::fromJson($e->getResponse()->getBody());
+        } catch (TransferException $e) {
+            throw new Exception($e->getMessage());
         }
     }
 

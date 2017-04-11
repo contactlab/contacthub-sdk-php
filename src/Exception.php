@@ -5,16 +5,25 @@ use Exception as BaseException;
 
 class Exception extends BaseException
 {
-    private $logRef;
+    private $logref;
     private $data;
     private $errors;
 
-    public function __construct($json)
+    public static function fromJson($json)
     {
-        parent::__construct($json['message']);
-        $this->logRef = $json['logref'];
-        $this->data = $json['data'];
-        $this->errors = $json['errors'];
+        $data = json_decode($json, true);
+        if (self::is404ErrorMessage($data)) {
+            return new static($data['error']);
+        }
+        return new static($data['message'], $data['logref'], $data['data'], $data['errors']);
+    }
+
+    public function __construct($message, $logref = '', $data = '', $errors = [])
+    {
+        parent::__construct($message);
+        $this->logref = $logref;
+        $this->data = $data;
+        $this->errors = $errors;
     }
 
     /**
@@ -40,4 +49,14 @@ class Exception extends BaseException
     {
         return $this->errors;
     }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    private static function is404ErrorMessage($data)
+    {
+        return (isset($data['status']) ? $data['status'] : null) == 404;
+    }
+
 }

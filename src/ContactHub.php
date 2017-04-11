@@ -20,7 +20,7 @@ class ContactHub
 
     /**
      * @param string $nodeId
-     * @return Paginated
+     * @return array
      */
     public function getCustomers($nodeId)
     {
