@@ -9,18 +9,18 @@ class Exception extends BaseException
     private $data;
     private $errors;
 
-    public static function fromJson($json)
+    public static function fromJson($json, \Exception $e)
     {
         $data = json_decode($json, true);
         if (self::is404ErrorMessage($data)) {
-            return new static($data['error']);
+            return new static($data['error'], '', '', [], $e);
         }
-        return new static($data['message'], $data['logref'], $data['data'], $data['errors']);
+        return new static($data['message'], $data['logref'], $data['data'], $data['errors'], $e);
     }
 
-    public function __construct($message, $logref = '', $data = '', $errors = [])
+    public function __construct($message, $logref = '', $data = '', $errors = [], \Exception $previous = null)
     {
-        parent::__construct($message);
+        parent::__construct($message, 0, $previous);
         $this->logref = $logref;
         $this->data = $data;
         $this->errors = $errors;

@@ -3,7 +3,6 @@ namespace ContactHub;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\TransferException;
 
 class GuzzleApiClient implements ApiClient
 {
@@ -29,9 +28,33 @@ class GuzzleApiClient implements ApiClient
             $response = $this->guzzle->request('GET', $this->url($path), ['query' => $params]);
             return json_decode((string) $response->getBody(), true);
         } catch (ClientException $e) {
-            throw Exception::fromJson($e->getResponse()->getBody());
-        } catch (TransferException $e) {
+            throw Exception::fromJson($e->getResponse()->getBody(), $e);
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
+        }
+    }
+
+    public function post($path, array $params = [])
+    {
+        try {
+            $response = $this->guzzle->request('POST', $this->url($path), ['json' => $params]);
+            return json_decode((string) $response->getBody(), true);
+        } catch (ClientException $e) {
+            throw Exception::fromJson($e->getResponse()->getBody(), $e);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage(), $e);
+        }
+    }
+
+    public function delete($path, $id)
+    {
+        try {
+            $response = $this->guzzle->request('DELETE', $this->url($path) . '/' . $id);
+            return json_decode((string) $response->getBody(), true);
+        } catch (ClientException $e) {
+            throw Exception::fromJson($e->getResponse()->getBody(), $e);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage(), $e);
         }
     }
 

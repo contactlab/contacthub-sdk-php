@@ -25,6 +25,39 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         assertEquals(10, $customers['page']['size']);
     }
 
+    public function testGetCustomersWithExternalId()
+    {
+        $nodeId = 'ead3702f-c755-4a6f-afe5-daea6634b5e5';
+        $customers = $this->contactHub->getCustomers($nodeId, 'externalId');
+
+        assertEquals([], $customers['elements']);
+        assertEquals(10, $customers['page']['size']);
+    }
+
+    public function testAddAndDeleteCustomer()
+    {
+        $nodeId = 'ead3702f-c755-4a6f-afe5-daea6634b5e5';
+        $customer = [
+            'externalId' => 'externalIdAltroaa',
+            'base' => [
+                'firstName' => 'First Nameaa',
+                'lastName' => 'Lastddd Nameaa',
+                'contacts' => [
+                    'email' => 'email@dddexaaample.com'
+                ]
+            ],
+            'extra' => 'extra string',
+            'tags' => [
+                'auto' => ['autotag'],
+                'manual' => ['manualtag']
+            ],
+            'enabled' => true
+        ];
+        $newCustomer = $this->contactHub->addCustomer($nodeId, $customer);
+
+        $this->contactHub->deleteCustomer($newCustomer['id']);
+    }
+
     public function testCustomersNotFound()
     {
         $this->expectException(Exception::class);
