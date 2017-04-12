@@ -18,15 +18,17 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
     {
         $customers = $this->contactHub->getCustomers(Auth::NODE_ID);
 
-        assertEquals([], $customers['elements']);
+        assertCount(4, $customers['elements']);
         assertEquals(10, $customers['page']['size']);
     }
 
     public function testGetCustomersWithExternalId()
     {
-        $customers = $this->contactHub->getCustomers(Auth::NODE_ID, 'externalId');
+        $customers = $this->contactHub->getCustomers(Auth::NODE_ID, '58ede74e05d14');
 
-        assertEquals([], $customers['elements']);
+        assertCount(1, $customers['elements']);
+        assertEquals('Giacomo', $customers['elements'][0]['base']['firstName']);
+        assertEquals('Poretti', $customers['elements'][0]['base']['lastName']);
         assertEquals(10, $customers['page']['size']);
     }
 
