@@ -11,15 +11,12 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $token = '68e6b3be8461489cac188c585cc0e694c72817cd72d04736a798ca4d9c5edcee';
-        $workspaceId = '37333bf0-73d9-440c-9d66-ac63936af5af';
-        $this->contactHub = ContactHub::create($token, $workspaceId);
+        $this->contactHub = ContactHub::create(Auth::TOKEN, Auth::WORKSPACE_ID);
     }
 
     public function testGetCustomers()
     {
-        $nodeId = 'ead3702f-c755-4a6f-afe5-daea6634b5e5';
-        $customers = $this->contactHub->getCustomers($nodeId);
+        $customers = $this->contactHub->getCustomers(Auth::NODE_ID);
 
         assertEquals([], $customers['elements']);
         assertEquals(10, $customers['page']['size']);
@@ -27,16 +24,22 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCustomersWithExternalId()
     {
-        $nodeId = 'ead3702f-c755-4a6f-afe5-daea6634b5e5';
-        $customers = $this->contactHub->getCustomers($nodeId, 'externalId');
+        $customers = $this->contactHub->getCustomers(Auth::NODE_ID, 'externalId');
 
         assertEquals([], $customers['elements']);
         assertEquals(10, $customers['page']['size']);
     }
 
-    public function testAddAndDeleteCustomer()
+    public function testCustomersNotFound()
     {
-        $nodeId = 'ead3702f-c755-4a6f-afe5-daea6634b5e5';
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('node not foundnot_present_node_id');
+
+        $this->contactHub->getCustomers('not_present_node_id');
+    }
+
+    public function testAddCustomer()
+    {
         $customer = [
             'externalId' => 'externalIdAltroaa',
             'base' => [
@@ -53,16 +56,14 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
             ],
             'enabled' => true
         ];
-        $newCustomer = $this->contactHub->addCustomer($nodeId, $customer);
-
-        $this->contactHub->deleteCustomer($newCustomer['id']);
+        return $this->contactHub->addCustomer(Auth::NODE_ID, $customer);
     }
 
-    public function testCustomersNotFound()
+    /**
+     * @depends testAddCustomer
+     */
+    public function testDeleteCustomer($customer)
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('node not foundnot_present_node_id');
-
-        $this->contactHub->getCustomers('not_present_node_id');
+        return $this->contactHub->deleteCustomer($customer['id']);
     }
 }
