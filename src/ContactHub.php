@@ -55,12 +55,19 @@ class ContactHub
         return $this->apiClient->post('customers', $customer);
     }
 
+    public function updateCustomer($customerId, $customer)
+    {
+        $customer['nodeId'] = $this->nodeId;
+        $customer['id'] = $customerId;
+        return $this->apiClient->put('customers/' . $customerId, $customer);
+    }
+
     /**
      * @param string $customerId
      * @return array
      */
     public function deleteCustomer($customerId)
     {
-        return $this->apiClient->delete('customers', $customerId);
+        return $this->apiClient->delete('customers/' . $customerId);
     }
 }

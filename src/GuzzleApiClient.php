@@ -46,12 +46,22 @@ class GuzzleApiClient implements ApiClient
 
     /**
      * @param string $path
-     * @param string $id
+     * @param array $params
      * @return array
      */
-    public function delete($path, $id)
+    public function delete($path, array $params = [])
     {
-        return $this->request('DELETE', $path . '/' . $id);
+        return $this->request('DELETE', $path, ['query' => $params]);
+    }
+
+    /**
+     * @param $path
+     * @param array $params
+     * @return array
+     */
+    public function put($path, array $params = [])
+    {
+        return $this->request('PUT', $path, ['json' => $params]);
     }
 
     /**
@@ -81,5 +91,4 @@ class GuzzleApiClient implements ApiClient
     {
         return '/hub/v1/workspaces/' . $this->workspaceId . '/' . $path;
     }
-
 }

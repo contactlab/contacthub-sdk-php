@@ -74,6 +74,25 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         assertCount(0, $customers['elements']);
     }
 
+    public function testUpdateCustomer()
+    {
+        $newEmail= uniqid() . '@domain.com';
+        $customer = [
+            'externalId' => '58ede6fa301b2',
+            'base' => [
+                'firstName' => 'Mario',
+                'lastName' => 'Rossi',
+                'contacts' => [
+                    'email' => $newEmail
+                ]
+            ]
+        ];
+
+        $customer = $this->contactHub->updateCustomer('4b72651c-0dc3-4936-a177-87539d3bd041', $customer);
+
+        assertEquals($newEmail, $customer['base']['contacts']['email']);
+    }
+
     public function testAddCustomer()
     {
         $customer = [
