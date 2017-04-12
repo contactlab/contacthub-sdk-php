@@ -9,18 +9,18 @@ class Exception extends BaseException
     private $data;
     private $errors;
 
-    public static function fromJson($json, \Exception $e)
+    public static function fromJson($json)
     {
         $data = json_decode($json, true);
-        if (self::is404ErrorMessage($data)) {
-            return new static($data['error'], '', '', [], $e);
+        if (self::isErrorMessage($data)) {
+            return new static($data['error'], '', '', []);
         }
-        return new static($data['message'], $data['logref'], $data['data'], $data['errors'], $e);
+        return new static($data['message'], $data['logref'], $data['data'], $data['errors']);
     }
 
-    public function __construct($message, $logref = '', $data = '', $errors = [], \Exception $previous = null)
+    public function __construct($message, $logref = '', $data = '', $errors = [])
     {
-        parent::__construct($message, 0, $previous);
+        parent::__construct($message);
         $this->logref = $logref;
         $this->data = $data;
         $this->errors = $errors;
@@ -54,9 +54,9 @@ class Exception extends BaseException
      * @param $data
      * @return bool
      */
-    private static function is404ErrorMessage($data)
+    private static function isErrorMessage($data)
     {
-        return (isset($data['status']) ? $data['status'] : null) == 404;
+        return isset($data['status']);
     }
 
 }

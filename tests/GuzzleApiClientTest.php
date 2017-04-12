@@ -25,4 +25,13 @@ class GuzzleApiClientTest extends PHPUnit_Framework_TestCase
         $client = new GuzzleApiClient(self::VALID_TOKEN, self::WORKSPACE_ID);
         $client->get('NOT_EXISTENT_ROUTE');
     }
+
+    public function testServerError()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Internal Server Error');
+
+        $client = new GuzzleApiClient(self::VALID_TOKEN, self::WORKSPACE_ID);
+        $client->delete('customers', null);
+    }
 }

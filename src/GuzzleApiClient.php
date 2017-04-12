@@ -2,7 +2,7 @@
 namespace ContactHub;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\BadResponseException;
 
 class GuzzleApiClient implements ApiClient
 {
@@ -22,44 +22,64 @@ class GuzzleApiClient implements ApiClient
         ]);
     }
 
+    /**
+     * @param string $path
+     * @param array $params
+     * @return string
+     * @throws Exception
+     */
     public function get($path, array $params = [])
     {
+        return $this->request('GET', $path, ['query' => $params]);
+    }
+
+    /**
+     * @param string $path
+     * @param array $params
+     * @return string
+     * @throws Exception
+     */
+    public function post($path, array $params = [])
+    {
+        return $this->request('POST', $path, ['json' => $params]);
+    }
+
+    /**
+     * @param string $path
+     * @param string $id
+     * @return string
+     */
+    public function delete($path, $id)
+    {
+        return $this->request('DELETE', $path . '/' . $id);
+    }
+
+    /**
+     * @param string $method
+     * @param string $path
+     * @param array $params
+     * @return string
+     * @throws Exception
+     */
+    private function request($method, $path, $params = [])
+    {
         try {
-            $response = $this->guzzle->request('GET', $this->url($path), ['query' => $params]);
-            return json_decode((string) $response->getBody(), true);
-        } catch (ClientException $e) {
-            throw Exception::fromJson($e->getResponse()->getBody(), $e);
+            $response = $this->guzzle->request($method, $this->url($path), $params);
+            return json_decode((string)$response->getBody(), true);
+        } catch (BadResponseException $e) {
+            throw Exception::fromJson($e->getResponse()->getBody());
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function post($path, array $params = [])
-    {
-        try {
-            $response = $this->guzzle->request('POST', $this->url($path), ['json' => $params]);
-            return json_decode((string) $response->getBody(), true);
-        } catch (ClientException $e) {
-            throw Exception::fromJson($e->getResponse()->getBody(), $e);
-        } catch (\Exception $e) {
-            throw new Exception($e->getMessage(), $e);
-        }
-    }
-
-    public function delete($path, $id)
-    {
-        try {
-            $response = $this->guzzle->request('DELETE', $this->url($path) . '/' . $id);
-            return json_decode((string) $response->getBody(), true);
-        } catch (ClientException $e) {
-            throw Exception::fromJson($e->getResponse()->getBody(), $e);
-        } catch (\Exception $e) {
-            throw new Exception($e->getMessage(), $e);
-        }
-    }
-
+    /**
+     * @param string $path
+     * @return string
+     */
     private function url($path)
     {
         return '/hub/v1/workspaces/' . $this->workspaceId . '/' . $path;
     }
+
 }
