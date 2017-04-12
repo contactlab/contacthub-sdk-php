@@ -93,6 +93,22 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         assertEquals($newEmail, $customer['base']['contacts']['email']);
     }
 
+    public function testPatchCustomer()
+    {
+        $newEmail= uniqid() . '@domain.it';
+        $customer = [
+            'base' => [
+                'contacts' => [
+                    'email' => $newEmail
+                ]
+            ]
+        ];
+
+        $customer = $this->contactHub->patchCustomer('4b72651c-0dc3-4936-a177-87539d3bd041', $customer);
+
+        assertEquals($newEmail, $customer['base']['contacts']['email']);
+    }
+
     public function testAddCustomer()
     {
         $customer = [

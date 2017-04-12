@@ -10,4 +10,6 @@ interface ApiClient
     public function put($path, array $params = []);
 
     public function delete($path, array $params = []);
+
+    public function patch($path, array $params = []);
 }

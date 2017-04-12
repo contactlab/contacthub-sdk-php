@@ -65,6 +65,16 @@ class GuzzleApiClient implements ApiClient
     }
 
     /**
+     * @param $path
+     * @param array $params
+     * @return array
+     */
+    public function patch($path, array $params = [])
+    {
+        return $this->request('PATCH', $path, ['json' => $params]);
+    }
+
+    /**
      * @param string $method
      * @param string $path
      * @param array $params

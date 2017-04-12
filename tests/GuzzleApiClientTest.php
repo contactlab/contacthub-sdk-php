@@ -30,6 +30,6 @@ class GuzzleApiClientTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionMessage('Internal Server Error');
 
         $client = new GuzzleApiClient(Auth::TOKEN, Auth::WORKSPACE_ID);
-        $client->delete('customers', null);
+        $client->delete('customers');
     }
 }
