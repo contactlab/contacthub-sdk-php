@@ -25,7 +25,8 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCustomersWithExternalId()
     {
-        $options = GetCustomersOptions::create()->withExternalId('58ede74e05d14');
+        $options = GetCustomersOptions::create()
+            ->withExternalId('58ede74e05d14');
         $customers = $this->contactHub->getCustomers(Auth::NODE_ID, $options);
 
         assertCount(1, $customers['elements']);
@@ -43,6 +44,19 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         assertCount(1, $customers['elements']);
         assertEquals('Giacomo', $customers['elements'][0]['base']['firstName']);
         assertNull($customers['elements'][0]['base']['lastName']);
+    }
+
+    public function testGetCustomerSortedByFirstName()
+    {
+        $options = GetCustomersOptions::create()
+            ->withSortBy('base.firstName', 'asc');
+        $customers = $this->contactHub->getCustomers(Auth::NODE_ID, $options);
+
+        assertCount(4, $customers['elements']);
+        assertEquals('Aldo', $customers['elements'][0]['base']['firstName']);
+        assertEquals('Giacomo', $customers['elements'][1]['base']['firstName']);
+        assertEquals('Giovanni', $customers['elements'][2]['base']['firstName']);
+        assertEquals('Mario', $customers['elements'][3]['base']['firstName']);
     }
 
     public function testCustomerNotFound()
