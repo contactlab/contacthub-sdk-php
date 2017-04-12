@@ -20,19 +20,14 @@ class ContactHub
 
     /**
      * @param string $nodeId
-     * @param string $externalId
-     * @param array $query
-     * @param array $fields
+     * @param GetCustomersOptions $options
      * @return array
      */
-    public function getCustomers($nodeId, $externalId = null, $query = null, $fields = [])
+    public function getCustomers($nodeId, GetCustomersOptions $options = null)
     {
-        return $this->apiClient->get('customers', [
-            'nodeId' => $nodeId,
-            'externalId' => $externalId,
-            'query' => json_encode($query),
-            'fields' => implode(',', $fields)
-        ]);
+        $params = is_null($options) ? [] : $options->getParams();
+        $params['nodeId'] = $nodeId;
+        return $this->apiClient->get('customers', $params);
     }
 
     public function addCustomer($nodeId, $customer)

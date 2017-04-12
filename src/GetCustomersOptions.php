@@ -10,6 +10,11 @@ class GetCustomersOptions
     private $direction = '';
     private $page;
 
+    public static function create()
+    {
+        return new static();
+    }
+
     /**
      * @param string $externalId
      * @return $this
