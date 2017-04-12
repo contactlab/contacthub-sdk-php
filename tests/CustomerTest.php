@@ -24,20 +24,28 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCustomersWithExternalId()
     {
+        $options =
         $customers = $this->contactHub->getCustomers(Auth::NODE_ID, '58ede74e05d14');
 
         assertCount(1, $customers['elements']);
         assertEquals('Giacomo', $customers['elements'][0]['base']['firstName']);
         assertEquals('Poretti', $customers['elements'][0]['base']['lastName']);
-        assertEquals(10, $customers['page']['size']);
     }
 
-    public function testCustomersNotFound()
+    public function testGetCustomersWithFilteredFields()
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('node not foundnot_present_node_id');
+        $customers = $this->contactHub->getCustomers(Auth::NODE_ID, '58ede74e05d14', null, ['base.firstName']);
 
-        $this->contactHub->getCustomers('not_present_node_id');
+        assertCount(1, $customers['elements']);
+        assertEquals('Giacomo', $customers['elements'][0]['base']['firstName']);
+        assertNull($customers['elements'][0]['base']['lastName']);
+    }
+
+    public function testCustomerNotFound()
+    {
+        $customers = $this->contactHub->getCustomers(Auth::NODE_ID, 'not_existent_external_id');
+
+        assertCount(0, $customers['elements']);
     }
 
     public function testAddCustomer()
@@ -68,4 +76,13 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
     {
         return $this->contactHub->deleteCustomer($customer['id']);
     }
+
+    public function testNotValidNodeId()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('node not foundnot_present_node_id');
+
+        $this->contactHub->getCustomers('not_present_node_id');
+    }
+
 }
