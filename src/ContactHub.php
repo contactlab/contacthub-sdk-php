@@ -36,12 +36,29 @@ class ContactHub
         return $this->apiClient->get('customers', $params);
     }
 
+    /**
+     * @param string $customerId
+     * @return array
+     */
+    public function getCustomer($customerId)
+    {
+        return $this->apiClient->get('customers/' . $customerId);
+    }
+
+    /**
+     * @param array $customer
+     * @return array
+     */
     public function addCustomer($customer)
     {
         $customer['nodeId'] = $this->nodeId;
         return $this->apiClient->post('customers', $customer);
     }
 
+    /**
+     * @param string $customerId
+     * @return array
+     */
     public function deleteCustomer($customerId)
     {
         return $this->apiClient->delete('customers', $customerId);

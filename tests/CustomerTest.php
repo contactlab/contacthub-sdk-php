@@ -14,6 +14,14 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $this->contactHub = new ContactHub(Auth::TOKEN, Auth::WORKSPACE_ID, Auth::NODE_ID);
     }
 
+    public function testGetCustomer()
+    {
+        $customer = $this->contactHub->getCustomer('be02ac64-4d66-4756-93fc-a9e4955db639');
+
+        assertEquals('Aldo', $customer['base']['firstName']);
+        assertEquals('Baglio', $customer['base']['lastName']);
+    }
+
     public function testGetCustomers()
     {
         $customers = $this->contactHub->getCustomers();

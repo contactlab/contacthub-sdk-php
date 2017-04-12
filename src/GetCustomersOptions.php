@@ -89,7 +89,6 @@ class GetCustomersOptions
      */
     private function queryToJson()
     {
-        $json = json_encode($this->query);
-        return $json == 'null' ? null : $json;
+        return $this->query ? json_encode($this->query) : null;
     }
 }
