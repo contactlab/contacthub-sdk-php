@@ -25,7 +25,7 @@ class GuzzleApiClient implements ApiClient
     /**
      * @param string $path
      * @param array $params
-     * @return string
+     * @return array
      * @throws Exception
      */
     public function get($path, array $params = [])
@@ -36,7 +36,7 @@ class GuzzleApiClient implements ApiClient
     /**
      * @param string $path
      * @param array $params
-     * @return string
+     * @return array
      * @throws Exception
      */
     public function post($path, array $params = [])
@@ -47,7 +47,7 @@ class GuzzleApiClient implements ApiClient
     /**
      * @param string $path
      * @param string $id
-     * @return string
+     * @return array
      */
     public function delete($path, $id)
     {
@@ -58,7 +58,7 @@ class GuzzleApiClient implements ApiClient
      * @param string $method
      * @param string $path
      * @param array $params
-     * @return string
+     * @return array
      * @throws Exception
      */
     private function request($method, $path, $params = [])

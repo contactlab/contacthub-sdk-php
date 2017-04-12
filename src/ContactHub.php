@@ -8,31 +8,37 @@ class ContactHub
      */
     private $apiClient;
 
-    private function __construct(ApiClient $apiClient)
-    {
-        $this->apiClient = $apiClient;
-    }
+    /**
+     * @var string
+     */
+    private $nodeId;
 
-    public static function create($token, $workspaceId)
+    /**
+     * ContactHub constructor.
+     * @param string $token
+     * @param string $workspaceId
+     * @param string $nodeId
+     */
+    public function __construct($token, $workspaceId, $nodeId)
     {
-        return new static(new GuzzleApiClient($token, $workspaceId));
+        $this->nodeId = $nodeId;
+        $this->apiClient = new GuzzleApiClient($token, $workspaceId);
     }
 
     /**
-     * @param string $nodeId
      * @param GetCustomersOptions $options
-     * @return array
+     * @return string
      */
-    public function getCustomers($nodeId, GetCustomersOptions $options = null)
+    public function getCustomers(GetCustomersOptions $options = null)
     {
         $params = is_null($options) ? [] : $options->getParams();
-        $params['nodeId'] = $nodeId;
+        $params['nodeId'] = $this->nodeId;
         return $this->apiClient->get('customers', $params);
     }
 
-    public function addCustomer($nodeId, $customer)
+    public function addCustomer($customer)
     {
-        $customer['nodeId'] = $nodeId;
+        $customer['nodeId'] = $this->nodeId;
         return $this->apiClient->post('customers', $customer);
     }
 
