@@ -1,35 +1,27 @@
 <?php
 namespace ContactHub\QueryBuilder;
 
+use ContactHub\QueryBuilder\Condition\Condition;
+
 class SimpleQueryBuilder
 {
-    private $name;
-    private $conditions = [];
+    private $condition;
 
-    public function __construct($name = '')
+    private function __construct(Condition $condition)
     {
-        $this->name = $name;
+        $this->condition = $condition;
     }
 
-    public function withCondition($attribute, $operator, $value = null)
+    public static function where(Condition $condition)
     {
-        $this->conditions[] = [
-            'type' => 'atomic',
-            'attribute' => $attribute,
-            'operator' => $operator,
-            'value' => $value
-        ];
-        return $this;
+        return new static($condition);
     }
 
     public function build()
     {
         return [
-            'name' => $this->name,
-            'query' => [
-                'type' => 'simple',
-                'are' => $this->conditions[1]
-            ],
+            'type' => 'simple',
+            'are' => $this->condition->build()
         ];
     }
 }

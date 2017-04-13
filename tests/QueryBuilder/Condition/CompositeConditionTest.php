@@ -2,7 +2,7 @@
 namespace QueryBuilder\Tests\QueryBuilder\Condition;
 
 use ContactHub\QueryBuilder\Condition\CompositeCondition;
-use ContactHub\QueryBuilder\Condition\Condition;
+use ContactHub\Tests\QueryBuilder\Condition\FakeCondition;
 
 class CompositeConditionTest extends \PHPUnit_Framework_TestCase
 {
@@ -43,13 +43,5 @@ class CompositeConditionTest extends \PHPUnit_Framework_TestCase
 
         assertEquals($expected, $condition->build());
 
-    }
-}
-
-class FakeCondition implements Condition
-{
-    public function build()
-    {
-        return ['fake_condition'];
     }
 }
