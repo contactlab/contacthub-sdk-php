@@ -2,53 +2,45 @@
 namespace ContactHub\Tests;
 
 use ContactHub\QueryBuilder;
+use ContactHub\Tests\QueryBuilder\Condition\FakeCondition;
+use ContactHub\Tests\QueryBuilder\FakeQueryBuilder;
 
 class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
-
-    public function testSimpleQueryWithAtomicCondition()
+    public function testSimpleQuery()
     {
-        static::markTestSkipped('WIP');
-
-        $query = QueryBuilder::simple()
-            ->withCondition('base.contacts.email', 'IN', '@example.com')
+        $query = QueryBuilder::simple(new FakeCondition())
+            ->withName('simple_query')
             ->build();
 
         $expected = [
-            'name' => '',
+            'name' => 'simple_query',
             'query' => [
                 'type' => 'simple',
-                'are' => [
-                    'type' => 'atomic',
-                    'attribute' => 'base.contacts.email',
-                    'operator' => 'IN',
-                    'value' => '@example.com'
+                'are' => ['fake_condition']
+            ]
+        ];
+
+        assertEquals($expected, $query);
+    }
+
+    public function testCombinedQuery()
+    {
+        $query = QueryBuilder::combined('OR', new FakeQueryBuilder())
+            ->withName('combined_query_builder')
+            ->build();
+
+        $expected = [
+            'name' => 'combined_query_builder',
+            'query' => [
+                'type' => 'combined',
+                'conjunction' => 'OR',
+                'queries' => [
+                    ['fake_query_builder']
                 ]
             ]
         ];
+
         assertEquals($expected, $query);
     }
-    public function testSimpleQueryBuilder()
-    {
-        static::markTestSkipped('WIP');
-
-        $nameQuery = QueryBuilder::simple()
-            ->withCondition('base.firstName', 'IS_NOT_NULL')
-            ->withCondition('base.lastName', 'EQUALS', 'Rossi')
-            ->withConjunction('or')
-            ->build();
-
-        $emailQuery = QueryBuilder::simple()
-            ->withCondition('base.contacts.email', 'IN', '@example.com')
-            ->build();
-
-        $query = QueryBuilder::combined()
-            ->withQuery($nameQuery)
-            ->withQuery($emailQuery)
-            ->withConjunction('INTERSECT')
-            ->build();
-
-        dump($query);
-    }
-
 }
