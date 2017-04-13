@@ -1,23 +1,23 @@
 <?php
 namespace ContactHub\QueryBuilder;
 
-class CombinedQueryBuilder implements QueryBuilder
+class CombinedQuery implements Query
 {
     /**
      * @var
      */
     private $conjunction;
     /**
-     * @var QueryBuilder[]
+     * @var Query[]
      */
     private $queryBuilders;
 
     /**
      * @param string $conjunction
-     * @param QueryBuilder[] ...$queryBuilders
+     * @param Query[] ...$queryBuilders
      * @return static
      */
-    public static function where($conjunction, QueryBuilder ...$queryBuilders)
+    public static function with($conjunction, Query ...$queryBuilders)
     {
         return new static($conjunction, $queryBuilders);
     }
@@ -33,7 +33,7 @@ class CombinedQueryBuilder implements QueryBuilder
         return [
             'type' => 'combined',
             'conjunction' => $this->conjunction,
-            'queries' => array_map(function (QueryBuilder $queryBuilder) {
+            'queries' => array_map(function (Query $queryBuilder) {
                 return $queryBuilder->build();
             }, $this->queryBuilders)
         ];

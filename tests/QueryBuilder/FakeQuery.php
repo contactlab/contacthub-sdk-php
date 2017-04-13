@@ -1,9 +1,9 @@
 <?php
 namespace ContactHub\Tests\QueryBuilder;
 
-use ContactHub\QueryBuilder\QueryBuilder;
+use ContactHub\QueryBuilder\Query;
 
-class FakeQueryBuilder implements QueryBuilder
+class FakeQuery implements Query
 {
     public function build()
     {

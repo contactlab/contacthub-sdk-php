@@ -1,47 +1,22 @@
 <?php
 namespace ContactHub;
 
-use ContactHub\QueryBuilder\CombinedQueryBuilder;
-use ContactHub\QueryBuilder\Condition\Condition;
-use ContactHub\QueryBuilder\QueryBuilder as BaseQueryBuilder;
-use ContactHub\QueryBuilder\SimpleQueryBuilder;
+use ContactHub\QueryBuilder\Query;
 
-class QueryBuilder implements BaseQueryBuilder
+class QueryBuilder
 {
-    private $name = '';
-    /**
-     * @var BaseQueryBuilder
-     */
-    private $queryBuilder;
+    private $name;
+    private $query;
 
-    /**
-     * @param Condition $condition
-     * @return static
-     */
-    public static function simple(Condition $condition)
+    public static function createQuery(Query $query, $name = '')
     {
-        return new static(SimpleQueryBuilder::where($condition));
+        return new static($query, $name);
     }
 
-    /**
-     * @param $conjunction
-     * @param BaseQueryBuilder[] ...$queryBuilders
-     * @return static
-     */
-    public static function combined($conjunction, BaseQueryBuilder ...$queryBuilders)
+    private function __construct(Query $query, $name)
     {
-        return new static(CombinedQueryBuilder::where($conjunction, ...$queryBuilders));
-    }
-
-    private function __construct(BaseQueryBuilder $queryBuilder)
-    {
-        $this->queryBuilder = $queryBuilder;
-    }
-
-    public function withName($name)
-    {
+        $this->query = $query;
         $this->name = (string) $name;
-        return $this;
     }
 
     /**
@@ -51,7 +26,7 @@ class QueryBuilder implements BaseQueryBuilder
     {
         return [
             'name' => $this->name,
-            'query' => $this->queryBuilder->build()
+            'query' => $this->query->build()
         ];
     }
 }

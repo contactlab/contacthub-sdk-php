@@ -1,7 +1,7 @@
 <?php
 namespace ContactHub\QueryBuilder;
 
-interface QueryBuilder
+interface Query
 {
     /**
      * @return array

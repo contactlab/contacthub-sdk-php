@@ -3,7 +3,7 @@ namespace ContactHub\QueryBuilder;
 
 use ContactHub\QueryBuilder\Condition\Condition;
 
-class SimpleQueryBuilder implements QueryBuilder
+class SimpleQuery implements Query
 {
     private $condition;
 
@@ -11,7 +11,7 @@ class SimpleQueryBuilder implements QueryBuilder
      * @param Condition $condition
      * @return static
      */
-    public static function where(Condition $condition)
+    public static function with(Condition $condition)
     {
         return new static($condition);
     }

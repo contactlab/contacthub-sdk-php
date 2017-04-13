@@ -1,13 +1,13 @@
 <?php
 namespace ContactHub\Tests\QueryBuilder;
 
-use ContactHub\QueryBuilder\CombinedQueryBuilder;
+use ContactHub\QueryBuilder\CombinedQuery;
 
 class CombinedQueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
     public function testWithOneQuery()
     {
-        $query = CombinedQueryBuilder::where('OR', new FakeQueryBuilder());
+        $query = CombinedQuery::with('OR', new FakeQuery());
 
         $expected = [
             'type' => 'combined',
@@ -22,10 +22,10 @@ class CombinedQueryBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testWithTwoQuery()
     {
-        $query = CombinedQueryBuilder::where(
+        $query = CombinedQuery::with(
             'OR',
-            new FakeQueryBuilder(),
-            new FakeQueryBuilder()
+            new FakeQuery(),
+            new FakeQuery()
         );
 
         $expected = [

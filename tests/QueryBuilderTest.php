@@ -2,45 +2,31 @@
 namespace ContactHub\Tests;
 
 use ContactHub\QueryBuilder;
-use ContactHub\Tests\QueryBuilder\Condition\FakeCondition;
-use ContactHub\Tests\QueryBuilder\FakeQueryBuilder;
+use ContactHub\Tests\QueryBuilder\FakeQuery;
 
 class QueryBuilderTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSimpleQuery()
+    public function testOptionalName()
     {
-        $query = QueryBuilder::simple(new FakeCondition())
-            ->withName('simple_query')
-            ->build();
+        $query = QueryBuilder::createQuery(new FakeQuery());
 
         $expected = [
-            'name' => 'simple_query',
-            'query' => [
-                'type' => 'simple',
-                'are' => ['fake_condition']
-            ]
+            'name' => '',
+            'query' => ['fake_query_builder']
         ];
 
-        assertEquals($expected, $query);
+        assertEquals($expected, $query->build());
     }
 
-    public function testCombinedQuery()
+    public function testWithName()
     {
-        $query = QueryBuilder::combined('OR', new FakeQueryBuilder())
-            ->withName('combined_query_builder')
-            ->build();
+        $query = QueryBuilder::createQuery(new FakeQuery(), 'named_query');
 
         $expected = [
-            'name' => 'combined_query_builder',
-            'query' => [
-                'type' => 'combined',
-                'conjunction' => 'OR',
-                'queries' => [
-                    ['fake_query_builder']
-                ]
-            ]
+            'name' => 'named_query',
+            'query' => ['fake_query_builder']
         ];
 
-        assertEquals($expected, $query);
+        assertEquals($expected, $query->build());
     }
 }
