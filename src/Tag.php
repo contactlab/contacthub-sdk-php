@@ -20,7 +20,7 @@ class Tag
         }
 
         if (self::isTagAlreadyPresent($customer, $tag)) {
-            $customer['tags']['manual'][] = $tag;
+            $customer['tags']['manual'][] = (string) $tag;
         }
 
         return $customer;
