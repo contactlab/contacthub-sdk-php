@@ -97,4 +97,16 @@ class ContactHub
         $customer = Tag::add($customer, $tag);
         return $this->updateCustomer($customerId, $customer);
     }
+
+    /**
+     * @param string $customerId
+     * @param string $tag
+     * @return array
+     */
+    public function removeTag($customerId, $tag)
+    {
+        $customer = $this->getCustomer($customerId);
+        $customer = Tag::remove($customer, $tag);
+        return $this->updateCustomer($customerId, $customer);
+    }
 }

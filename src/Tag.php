@@ -28,6 +28,27 @@ class Tag
 
     /**
      * @param array $customer
+     * @param $tag
+     * @return array
+     */
+    public static function remove(array $customer, $tag)
+    {
+        if (self::isWithoutTagsSection($customer)) {
+            return $customer;
+        }
+
+        if (is_null($customer['tags']['manual'])) {
+            return $customer;
+        }
+
+        if(($key = array_search($tag, $customer['tags']['manual'])) !== false) {
+            unset($customer['tags']['manual'][$key]);
+        }
+        return $customer;
+    }
+
+    /**
+     * @param array $customer
      * @return bool
      */
     private static function isWithoutTagsSection(array $customer)
