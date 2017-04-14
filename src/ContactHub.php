@@ -109,4 +109,35 @@ class ContactHub
         $customer = Tag::remove($customer, $tag);
         return $this->updateCustomer($customerId, $customer);
     }
+
+    /**
+     * @param string $customerId
+     * @param array $like
+     * @return array
+     */
+    public function addLike($customerId, array $like)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/likes' , $like);
+    }
+
+    /**
+     * @param string $customerId
+     * @param array $like
+     * @return array
+     */
+    public function updateLike($customerId, array $like)
+    {
+        $likeId = $like['id'];
+        return $this->apiClient->put('customers/' . $customerId . '/likes/' . $likeId, $like);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $likeId
+     * @return array
+     */
+    public function deleteLike($customerId, $likeId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/likes/' . $likeId);
+    }
 }
