@@ -1,18 +1,11 @@
 <?php
 namespace ContactHub\Tests;
 
-use ContactHub\ContactHub;
 use ContactHub\GetCustomersOptions;
 
 class CustomerTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var ContactHub */
-    private $contactHub;
-
-    public function setUp()
-    {
-        $this->contactHub = new ContactHub(Auth::TOKEN, Auth::WORKSPACE_ID, Auth::NODE_ID);
-    }
+    use ContactHubSetUpTrait;
 
     public function testGetCustomer()
     {
