@@ -1,1 +1,3 @@
-test: ; vendor/bin/phpunit
+build: ; docker build -t contacthub .
+
+.PHONY: test
