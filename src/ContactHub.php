@@ -1,6 +1,8 @@
 <?php
 namespace ContactHub;
 
+use Ramsey\Uuid\Uuid;
+
 class ContactHub
 {
     /**
@@ -111,6 +113,32 @@ class ContactHub
     }
 
     /**
+     * @return string
+     */
+    public function generateSessionId()
+    {
+        return Uuid::uuid4()->toString();
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $sessionId
+     * @return array
+     */
+    public function addSession($customerId, $sessionId)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/sessions', ['value' => $sessionId]);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $sessionId
+     * @return array
+     */
+    public function deleteSession($customerId, $sessionId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/sessions/' . $sessionId);
+    }
 
      * @param $customerId
      * @param array $education
@@ -153,6 +181,23 @@ class ContactHub
 
     /**
      * @param string $customerId
+     * @return array
+     */
+    public function getSessions($customerId)
+    {
+        return $this->apiClient->get('customers/' . $customerId . '/sessions');
+    }
+
+    /**
+     * @param $customerId
+     * @param $sessionId
+     * @return array
+     */
+    public function getSession($customerId, $sessionId)
+    {
+        return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
+    }
+  
      * @param array $like
      * @return array
      */
