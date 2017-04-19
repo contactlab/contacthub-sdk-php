@@ -140,6 +140,7 @@ class ContactHub
         return $this->apiClient->delete('customers/' . $customerId . '/sessions/' . $sessionId);
     }
 
+    /**
      * @param $customerId
      * @param array $education
      * @return array
@@ -169,7 +170,8 @@ class ContactHub
     {
         return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
     }
-  
+
+    /**
      * @param string $customerId
      * @param array $like
      * @return array
@@ -197,7 +199,8 @@ class ContactHub
     {
         return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
     }
-  
+
+    /**
      * @param array $like
      * @return array
      */
