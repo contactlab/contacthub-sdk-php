@@ -140,6 +140,45 @@ class ContactHub
         return $this->apiClient->delete('customers/' . $customerId . '/sessions/' . $sessionId);
     }
 
+     * @param $customerId
+     * @param array $education
+     * @return array
+     */
+    public function addEducation($customerId, array $education)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/educations', $education);
+    }
+
+    /**
+     * @param $customerId
+     * @param array $education
+     * @return array
+     */
+    public function updateEducation($customerId, array $education)
+    {
+        $educationId = $education['id'];
+        return $this->apiClient->put('customers/' . $customerId . '/educations/' . $educationId, $education);
+    }
+
+    /**
+     * @param $customerId
+     * @param $educationId
+     * @return array
+     */
+    public function deleteEducation($customerId, $educationId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
+    }
+  
+     * @param string $customerId
+     * @param array $like
+     * @return array
+     */
+    public function addLike($customerId, array $like)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/likes' , $like);
+    }
+
     /**
      * @param string $customerId
      * @return array
@@ -157,5 +196,24 @@ class ContactHub
     public function getSession($customerId, $sessionId)
     {
         return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
+    }
+  
+     * @param array $like
+     * @return array
+     */
+    public function updateLike($customerId, array $like)
+    {
+        $likeId = $like['id'];
+        return $this->apiClient->put('customers/' . $customerId . '/likes/' . $likeId, $like);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $likeId
+     * @return array
+     */
+    public function deleteLike($customerId, $likeId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/likes/' . $likeId);
     }
 }

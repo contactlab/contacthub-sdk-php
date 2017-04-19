@@ -27,7 +27,7 @@ class GuzzleApiClientTest extends \PHPUnit_Framework_TestCase
     public function testServerError()
     {
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Internal Server Error');
+        $this->expectExceptionMessage('Request method \'DELETE\' not supported');
 
         $client = new GuzzleApiClient(Auth::TOKEN, Auth::WORKSPACE_ID);
         $client->delete('customers');
