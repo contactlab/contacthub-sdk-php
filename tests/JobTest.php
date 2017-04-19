@@ -32,7 +32,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     {
         $job['jobTitle'] = 'New Job Title';
 
-        $job = $this->contactHub->updateJob(static::MARIO_ROSSI_CUSTOMER_ID, $job);
+        $job = $this->contactHub->updateJob(static::MARIO_ROSSI_CUSTOMER_ID, $job['id'], $job);
 
         assertEquals('New Job Title', $job['jobTitle']);
         return $job;

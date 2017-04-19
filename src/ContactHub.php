@@ -240,12 +240,13 @@ class ContactHub
     }
 
     /**
+     * @param string $customerId
+     * @param string $jobId
      * @param array $job
      * @return array
      */
-    public function updateJob($customerId, array $job)
+    public function updateJob($customerId, $jobId, array $job)
     {
-        $jobId = $job['id'];
         return $this->apiClient->put('customers/' . $customerId . '/jobs/' . $jobId, $job);
     }
 }
