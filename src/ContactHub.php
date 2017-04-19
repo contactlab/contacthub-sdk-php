@@ -111,6 +111,7 @@ class ContactHub
     }
 
     /**
+
      * @param $customerId
      * @param array $education
      * @return array
@@ -139,5 +140,35 @@ class ContactHub
     public function deleteEducation($customerId, $educationId)
     {
         return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
+    }
+  
+     * @param string $customerId
+     * @param array $like
+     * @return array
+     */
+    public function addLike($customerId, array $like)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/likes' , $like);
+    }
+
+    /**
+     * @param string $customerId
+     * @param array $like
+     * @return array
+     */
+    public function updateLike($customerId, array $like)
+    {
+        $likeId = $like['id'];
+        return $this->apiClient->put('customers/' . $customerId . '/likes/' . $likeId, $like);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $likeId
+     * @return array
+     */
+    public function deleteLike($customerId, $likeId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/likes/' . $likeId);
     }
 }
