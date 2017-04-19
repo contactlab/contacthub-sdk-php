@@ -305,11 +305,12 @@ class ContactHub
 
     /**
      * @param string $customerId
+     * @param GetEventsOptions $options
      * @return array
      */
-    public function getEvents($customerId)
+    public function getEvents($customerId, GetEventsOptions $options)
     {
-        $params = [];
+        $params = $options ? $options->toParams() : [];
         $params['customerId'] = (string) $customerId;
         return $this->apiClient->get('events', $params);
     }

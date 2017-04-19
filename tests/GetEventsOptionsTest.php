@@ -2,22 +2,22 @@
 namespace ContactHub\Tests;
 
 use ContactHub\EventContext;
-use ContactHub\EventFilter;
+use ContactHub\GetEventsOptions;
 use ContactHub\EventMode;
 use ContactHub\EventType;
 
-class EventFiltersTest extends \PHPUnit_Framework_TestCase
+class GetEventsOptionsTest extends \PHPUnit_Framework_TestCase
 {
     public function testEmptyEventFilter()
     {
-        $filter = EventFilter::create();
+        $filter = GetEventsOptions::create();
 
         assertEquals([], $filter->toParams());
     }
 
     public function testWithType()
     {
-        $filter = EventFilter::create()
+        $filter = GetEventsOptions::create()
             ->withType(EventType::ABANDONED_CART);
 
         assertEquals(['type' => 'abandonedCart'], $filter->toParams());
@@ -28,12 +28,12 @@ class EventFiltersTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionMessage('EventType: "INVALID_EVENT_TYPE" is invalid');
         $this->expectException(\InvalidArgumentException::class);
 
-        EventFilter::create()->withType('INVALID_EVENT_TYPE');
+        GetEventsOptions::create()->withType('INVALID_EVENT_TYPE');
     }
 
     public function testWithContext()
     {
-        $filter = EventFilter::create()
+        $filter = GetEventsOptions::create()
             ->withContext(EventContext::CONTACT_CENTER);
 
         assertEquals(['context' => 'CONTACT_CENTER'], $filter->toParams());
@@ -44,12 +44,12 @@ class EventFiltersTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionMessage('EventContext: "INVALID_EVENT_CONTEXT" is invalid');
         $this->expectException(\InvalidArgumentException::class);
 
-        EventFilter::create()->withContext('INVALID_EVENT_CONTEXT');
+        GetEventsOptions::create()->withContext('INVALID_EVENT_CONTEXT');
     }
 
     public function testWithMode()
     {
-        $filter = EventFilter::create()
+        $filter = GetEventsOptions::create()
             ->withMode(EventMode::ACTIVE);
 
         assertEquals(['mode' => 'ACTIVE'], $filter->toParams());
@@ -60,12 +60,12 @@ class EventFiltersTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionMessage('EventMode: "INVALID_EVENT_MODE" is invalid');
         $this->expectException(\InvalidArgumentException::class);
 
-        EventFilter::create()->withMode('INVALID_EVENT_MODE');
+        GetEventsOptions::create()->withMode('INVALID_EVENT_MODE');
     }
 
     public function testWithDateFrom()
     {
-        $filter = EventFilter::create()
+        $filter = GetEventsOptions::create()
             ->withDateFrom(new \DateTime('1957-02-20'));
 
         assertEquals(['dateFrom' => '1957-02-20T00:00:00+00:00'], $filter->toParams());
@@ -73,7 +73,7 @@ class EventFiltersTest extends \PHPUnit_Framework_TestCase
 
     public function testWithDateTo()
     {
-        $filter = EventFilter::create()
+        $filter = GetEventsOptions::create()
             ->withDateTo(new \DateTime('1958-09-28'));
 
         assertEquals(['dateTo' => '1958-09-28T00:00:00+00:00'], $filter->toParams());
@@ -81,7 +81,7 @@ class EventFiltersTest extends \PHPUnit_Framework_TestCase
 
     public function testWithPage()
     {
-        $filter = EventFilter::create()
+        $filter = GetEventsOptions::create()
             ->withPage(2);
 
         assertEquals(['page' => 2], $filter->toParams());

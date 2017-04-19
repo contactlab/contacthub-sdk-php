@@ -1,6 +1,9 @@
 <?php
 namespace ContactHub\Tests;
 
+use ContactHub\EventContext;
+use ContactHub\GetEventsOptions;
+
 class EventTest extends \PHPUnit_Framework_TestCase
 {
     use ContactHubSetUpTrait;
@@ -16,5 +19,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEventsWithFilter()
     {
+        $options = GetEventsOptions::create()->withContext(EventContext::IOT);
+        $events = $this->contactHub->getEvents(self::MARIO_ROSSI_CUSTOMER_ID, $options);
     }
 }

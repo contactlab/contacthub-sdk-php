@@ -1,7 +1,7 @@
 <?php
 namespace ContactHub;
 
-class EventFilter
+class GetEventsOptions
 {
     private $eventType;
     private $eventContext;
