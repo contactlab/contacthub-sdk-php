@@ -308,10 +308,30 @@ class ContactHub
      * @param GetEventsOptions $options
      * @return array
      */
-    public function getEvents($customerId, GetEventsOptions $options)
+    public function getEvents($customerId, GetEventsOptions $options = null)
     {
         $params = $options ? $options->toParams() : [];
         $params['customerId'] = (string) $customerId;
         return $this->apiClient->get('events', $params);
+    }
+
+    /**
+     * @param string $customerId
+     * @param array $event
+     * @return array
+     */
+    public function addEvent($customerId, array $event)
+    {
+        $event['customerId'] = $customerId;
+        return $this->apiClient->post('events', $event);
+    }
+
+    /**
+     * @param string $eventId
+     * @return array
+     */
+    public function deleteEvent($eventId)
+    {
+        return $this->apiClient->delete('events/' . $eventId);
     }
 }
