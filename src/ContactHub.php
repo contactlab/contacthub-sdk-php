@@ -127,7 +127,17 @@ class ContactHub
      */
     public function addSession($customerId, $sessionId)
     {
-        return $this->apiClient->post('customers/' . $customerId . '/sessions', ['value' => $sessionId]);
+        return $this->apiClient->post('customers/'.$customerId.'/sessions', ['value' => $sessionId]);
+    }
+
+    /**
+     * @param string $customerId
+     * @param array $job
+     * @return array
+     */
+    public function addJob($customerId, array $job)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/jobs' , $job);
     }
 
     /**
@@ -147,7 +157,16 @@ class ContactHub
      */
     public function addEducation($customerId, array $education)
     {
-        return $this->apiClient->post('customers/' . $customerId . '/educations', $education);
+        return $this->apiClient->post('customers/'.$customerId.'/educations', $education);
+    }
+
+    /**
+     * @param string $jobId
+     * @return array
+     */
+    public function deleteJob($customerId, $jobId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/jobs/' . $jobId);
     }
 
     /**
@@ -217,6 +236,17 @@ class ContactHub
      */
     public function deleteLike($customerId, $likeId)
     {
-        return $this->apiClient->delete('customers/' . $customerId . '/likes/' . $likeId);
+        return $this->apiClient->delete('customers/'.$customerId.'/likes/'.$likeId);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $jobId
+     * @param array $job
+     * @return array
+     */
+    public function updateJob($customerId, $jobId, array $job)
+    {
+        return $this->apiClient->put('customers/' . $customerId . '/jobs/' . $jobId, $job);
     }
 }
