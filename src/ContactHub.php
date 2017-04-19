@@ -302,4 +302,15 @@ class ContactHub
     {
         return $this->apiClient->delete('customers/'.$customerId.'/likes/'.$likeId);
     }
+
+    /**
+     * @param string $customerId
+     * @return array
+     */
+    public function getEvents($customerId)
+    {
+        $params = [];
+        $params['customerId'] = (string) $customerId;
+        return $this->apiClient->get('events', $params);
+    }
 }
