@@ -111,6 +111,37 @@ class ContactHub
     }
 
     /**
+
+     * @param $customerId
+     * @param array $education
+     * @return array
+     */
+    public function addEducation($customerId, array $education)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/educations', $education);
+    }
+
+    /**
+     * @param $customerId
+     * @param array $education
+     * @return array
+     */
+    public function updateEducation($customerId, array $education)
+    {
+        $educationId = $education['id'];
+        return $this->apiClient->put('customers/' . $customerId . '/educations/' . $educationId, $education);
+    }
+
+    /**
+     * @param $customerId
+     * @param $educationId
+     * @return array
+     */
+    public function deleteEducation($customerId, $educationId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
+    }
+  
      * @param string $customerId
      * @param array $like
      * @return array
