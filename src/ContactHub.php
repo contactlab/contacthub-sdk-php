@@ -58,11 +58,11 @@ class ContactHub
     }
 
     /**
-     * @param $customerId
-     * @param $customer
+     * @param string $customerId
+     * @param array $customer
      * @return array
      */
-    public function updateCustomer($customerId, $customer)
+    public function updateCustomer($customerId, array $customer)
     {
         $customer['nodeId'] = $this->nodeId;
         $customer['id'] = $customerId;
@@ -79,11 +79,11 @@ class ContactHub
     }
 
     /**
-     * @param $customerId
-     * @param $customer
+     * @param string $customerId
+     * @param array $customer
      * @return array
      */
-    public function patchCustomer($customerId, $customer)
+    public function patchCustomer($customerId, array $customer)
     {
         return $this->apiClient->patch('customers/' . $customerId, $customer);
     }
@@ -110,6 +110,57 @@ class ContactHub
         $customer = $this->getCustomer($customerId);
         $customer = Tag::remove($customer, $tag);
         return $this->updateCustomer($customerId, $customer);
+    }
+
+    /**
+     * @param string $customerId
+     * @param array $education
+     * @return array
+     */
+    public function addEducation($customerId, array $education)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/educations', $education);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $educationId
+     * @param array $education
+     * @return array
+     */
+    public function updateEducation($customerId, $educationId, array $education)
+    {
+        $education['id'] = $educationId;
+        return $this->apiClient->put('customers/' . $customerId . '/educations/' . $educationId, $education);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $educationId
+     * @return array
+     */
+    public function deleteEducation($customerId, $educationId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
+    }
+
+    /**
+     * @param string $customerId
+     * @return array
+     */
+    public function getSessions($customerId)
+    {
+        return $this->apiClient->get('customers/' . $customerId . '/sessions');
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $sessionId
+     * @return array
+     */
+    public function getSession($customerId, $sessionId)
+    {
+        return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
     }
 
     /**
@@ -142,63 +193,12 @@ class ContactHub
 
     /**
      * @param string $customerId
-     * @param array $education
-     * @return array
-     */
-    public function addEducation($customerId, array $education)
-    {
-        return $this->apiClient->post('customers/' . $customerId . '/educations', $education);
-    }
-
-    /**
-     * @param string $customerId
-     * @param string $educationId
-     * @param array $education
-     * @return array
-     */
-    public function updateEducation($customerId, $educationId, array $education)
-    {
-        $education['id'] = $educationId;
-        return $this->apiClient->put('customers/' . $customerId . '/educations/' . $educationId, $education);
-    }
-
-    /**
-     * @param $customerId
-     * @param $educationId
-     * @return array
-     */
-    public function deleteEducation($customerId, $educationId)
-    {
-        return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
-    }
-
-    /**
-     * @param string $customerId
      * @param array $like
      * @return array
      */
     public function addLike($customerId, array $like)
     {
         return $this->apiClient->post('customers/' . $customerId . '/likes' , $like);
-    }
-
-    /**
-     * @param string $customerId
-     * @return array
-     */
-    public function getSessions($customerId)
-    {
-        return $this->apiClient->get('customers/' . $customerId . '/sessions');
-    }
-
-    /**
-     * @param $customerId
-     * @param $sessionId
-     * @return array
-     */
-    public function getSession($customerId, $sessionId)
-    {
-        return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
     }
 
     /**
