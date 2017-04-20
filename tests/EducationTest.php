@@ -32,7 +32,7 @@ class EducationTest extends \PHPUnit_Framework_TestCase
     {
         $education['schoolConcentration'] = 'NewSchoolConcentration';
 
-        $education = $this->contactHub->updateEducation(Customer::ALDO_BAGLIO, $education);
+        $education = $this->contactHub->updateEducation(Customer::ALDO_BAGLIO, $education['id'], $education);
 
         assertEquals('NewSchoolConcentration', $education['schoolConcentration']);
         return $education;

@@ -141,7 +141,7 @@ class ContactHub
     }
 
     /**
-     * @param $customerId
+     * @param string $customerId
      * @param array $education
      * @return array
      */
@@ -151,13 +151,14 @@ class ContactHub
     }
 
     /**
-     * @param $customerId
+     * @param string $customerId
+     * @param string $educationId
      * @param array $education
      * @return array
      */
-    public function updateEducation($customerId, array $education)
+    public function updateEducation($customerId, $educationId, array $education)
     {
-        $educationId = $education['id'];
+        $education['id'] = $educationId;
         return $this->apiClient->put('customers/' . $customerId . '/educations/' . $educationId, $education);
     }
 
