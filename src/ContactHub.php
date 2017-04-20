@@ -155,17 +155,7 @@ class ContactHub
      */
     public function updateEducation($customerId, $educationId, array $education)
     {
-        return $this->apiClient->post('customers/'.$customerId.'/sessions', ['value' => $sessionId]);
-    }
-
-    /**
-     * @param string $customerId
-     * @param array $job
-     * @return array
-     */
-    public function addJob($customerId, array $job)
-    {
-        return $this->apiClient->post('customers/' . $customerId . '/jobs' , $job);
+        return $this->apiClient->put('customers/'.$customerId.'/educations/' . $educationId, $education);
     }
 
     /**
@@ -181,6 +171,53 @@ class ContactHub
     }
 
     /**
+     * Add customer Job
+     *
+     * @param string $customerId
+     * @param array $job
+     * @return array
+     */
+    public function addJob($customerId, array $job)
+    {
+        return $this->apiClient->post('customers/' . $customerId . '/jobs' , $job);
+    }
+
+    /**
+     * Update customer Job
+     *
+     * @param string $customerId
+     * @param string $jobId
+     * @param array $job
+     * @return array
+     */
+    public function updateJob($customerId, $jobId, array $job)
+    {
+        return $this->apiClient->put('customers/' . $customerId . '/jobs/' . $jobId, $job);
+    }
+
+    /**
+     * Delete customer Job
+     *
+     * @param string $customerId
+     * @param string $jobId
+     * @return array
+     */
+    public function deleteJob($customerId, $jobId)
+    {
+        return $this->apiClient->delete('customers/' . $customerId . '/jobs/' . $jobId);
+    }
+
+    /**
+     * Generate session id
+     *
+     * @return string
+     */
+    public function generateSessionId()
+    {
+        return Uuid::uuid4()->toString();
+    }
+
+    /**
      * Gets list of session assign to customer
      *
      * @param string $customerId
@@ -191,14 +228,6 @@ class ContactHub
         return $this->apiClient->get('customers/' . $customerId . '/sessions');
     }
 
-    /**
-     * @param string $jobId
-     * @return array
-     */
-    public function deleteJob($customerId, $jobId)
-    {
-        return $this->apiClient->delete('customers/' . $customerId . '/jobs/' . $jobId);
-    }
 
     /**
      * Gets a specific sessions assigned at customer
@@ -210,16 +239,6 @@ class ContactHub
     public function getSession($customerId, $sessionId)
     {
         return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
-    }
-
-    /**
-     * Generate session id
-     *
-     * @return string
-     */
-    public function generateSessionId()
-    {
-        return Uuid::uuid4()->toString();
     }
 
     /**
@@ -282,16 +301,5 @@ class ContactHub
     public function deleteLike($customerId, $likeId)
     {
         return $this->apiClient->delete('customers/'.$customerId.'/likes/'.$likeId);
-    }
-
-    /**
-     * @param string $customerId
-     * @param string $jobId
-     * @param array $job
-     * @return array
-     */
-    public function updateJob($customerId, $jobId, array $job)
-    {
-        return $this->apiClient->put('customers/' . $customerId . '/jobs/' . $jobId, $job);
     }
 }
