@@ -40,6 +40,18 @@ class EventTest extends \PHPUnit_Framework_TestCase
             ],
             'date' => date('c')
         ];
-        $this->contactHub->addEvent(self::MARIO_ROSSI_CUSTOMER_ID, $event);
+
+        $event = $this->contactHub->addEvent(self::MARIO_ROSSI_CUSTOMER_ID, $event);
+
+        assertEquals('http://ecommerce.event.url', $event['properties']['url']);
+        return $event;
+    }
+
+    /**
+     * @depends testCreateEvent
+     */
+    public function testDeleteEvent(array $event)
+    {
+        $this->contactHub->deleteEvent($event['id']);
     }
 }
