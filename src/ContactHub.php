@@ -304,6 +304,8 @@ class ContactHub
     }
 
     /**
+     * Get customer events
+     *
      * @param string $customerId
      * @param GetEventsOptions $options
      * @return array
@@ -316,6 +318,8 @@ class ContactHub
     }
 
     /**
+     * Add customer event
+     *
      * @param string $customerId
      * @param array $event
      * @return array
@@ -327,6 +331,8 @@ class ContactHub
     }
 
     /**
+     * Delete customer event
+     * 
      * @param string $eventId
      * @return array
      */
