@@ -9,11 +9,9 @@ class EventTest extends \PHPUnit_Framework_TestCase
 {
     use ContactHubSetUpTrait;
 
-    const MARIO_ROSSI_CUSTOMER_ID = 'be02ac64-4d66-4756-93fc-a9e4955db639';
-
     public function testGetEvents()
     {
-        $events = $this->contactHub->getEvents(self::MARIO_ROSSI_CUSTOMER_ID);
+        $events = $this->contactHub->getEvents(Customer::MARIO_ROSSI);
 
         assertEquals(10, $events['page']['size']);
     }
@@ -22,7 +20,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
     {
         $options = GetEventsOptions::create()
             ->withContext(EventContext::ECOMMERCE);
-        $events = $this->contactHub->getEvents(self::MARIO_ROSSI_CUSTOMER_ID, $options);
+        $events = $this->contactHub->getEvents(Customer::ALDO_BAGLIO, $options);
 
         assertCount(1, $events['elements']);
         assertEquals(EventContext::ECOMMERCE, $events['elements'][0]['context']);
@@ -41,7 +39,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
             'date' => date('c')
         ];
 
-        $event = $this->contactHub->addEvent(self::MARIO_ROSSI_CUSTOMER_ID, $event);
+        $event = $this->contactHub->addEvent(Customer::MARIO_ROSSI, $event);
 
         assertEquals('http://ecommerce.event.url', $event['properties']['url']);
         return $event;
