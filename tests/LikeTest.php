@@ -8,7 +8,7 @@ class LikeTest extends \PHPUnit_Framework_TestCase
     public function testAddLike()
     {
         $like = [
-            'id' => 'LikeId',
+            'id' => uniqid(),
             'category' => 'Category',
             'name' => 'Name',
             'createdTime' => $this->now()

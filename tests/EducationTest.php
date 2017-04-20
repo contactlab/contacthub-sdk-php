@@ -10,7 +10,7 @@ class EducationTest extends \PHPUnit_Framework_TestCase
     public function testAddEducation()
     {
         $education = [
-            'id' => 'EducationId',
+            'id' => uniqid(),
             'schoolType' => SchoolType::HIGH_SCHOOL,
             'schoolName' => 'SchoolName',
             'schoolConcentration' => 'SchoolConcentration',

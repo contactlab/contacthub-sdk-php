@@ -18,7 +18,8 @@ class GuzzleApiClient implements ApiClient
             'base_uri' => self::BASE_URL,
             'headers' => [
                 'Authorization' => 'Bearer ' . $token
-            ]
+            ],
+            'connect_timeout' => 20
         ]);
     }
 
