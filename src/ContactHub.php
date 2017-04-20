@@ -51,7 +51,7 @@ class ContactHub
      * @param array $customer
      * @return array
      */
-    public function addCustomer($customer)
+    public function addCustomer(array $customer)
     {
         $customer['nodeId'] = $this->nodeId;
         return $this->apiClient->post('customers', $customer);
@@ -202,12 +202,14 @@ class ContactHub
     }
 
     /**
+     * @param string $customerId
+     * @param string $likeId
      * @param array $like
      * @return array
      */
-    public function updateLike($customerId, array $like)
+    public function updateLike($customerId, $likeId, array $like)
     {
-        $likeId = $like['id'];
+        $like['id'] = $likeId;
         return $this->apiClient->put('customers/' . $customerId . '/likes/' . $likeId, $like);
     }
 

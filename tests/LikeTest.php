@@ -25,7 +25,7 @@ class LikeTest extends \PHPUnit_Framework_TestCase
     public function testUpdateLike($like)
     {
         $like['name'] = 'NewName';
-        $like = $this->contactHub->updateLike(Customer::ALDO_BAGLIO, $like);
+        $like = $this->contactHub->updateLike(Customer::ALDO_BAGLIO, $like['id'], $like);
 
         assertEquals('NewName', $like['name']);
         return $like;
