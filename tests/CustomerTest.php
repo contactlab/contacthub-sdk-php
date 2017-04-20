@@ -9,7 +9,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCustomer()
     {
-        $customer = $this->contactHub->getCustomer('be02ac64-4d66-4756-93fc-a9e4955db639');
+        $customer = $this->contactHub->getCustomer(Customer::ALDO_BAGLIO);
 
         assertEquals('Aldo', $customer['base']['firstName']);
         assertEquals('Baglio', $customer['base']['lastName']);
@@ -81,7 +81,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $customer = $this->contactHub->updateCustomer('4b72651c-0dc3-4936-a177-87539d3bd041', $customer);
+        $customer = $this->contactHub->updateCustomer(Customer::MARIO_ROSSI, $customer);
 
         assertEquals($newEmail, $customer['base']['contacts']['email']);
     }
@@ -97,7 +97,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $customer = $this->contactHub->patchCustomer('4b72651c-0dc3-4936-a177-87539d3bd041', $customer);
+        $customer = $this->contactHub->patchCustomer(Customer::MARIO_ROSSI, $customer);
 
         assertEquals($newEmail, $customer['base']['contacts']['email']);
     }

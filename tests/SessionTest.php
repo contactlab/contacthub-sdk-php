@@ -4,7 +4,6 @@ namespace ContactHub\Tests;
 class SessionTest extends \PHPUnit_Framework_TestCase
 {
     const UUID4_REGEX = '/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i';
-    const MARIO_ROSSI_CUSTOMER_ID = 'be02ac64-4d66-4756-93fc-a9e4955db639';
     const A_SESSION_ID = 'a1bc8ac2-2311-494e-bf22-1af4f64881e1';
 
     use ContactHubSetUpTrait;
@@ -17,7 +16,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSessions()
     {
-        $sessions = $this->contactHub->getSessions(self::MARIO_ROSSI_CUSTOMER_ID);
+        $sessions = $this->contactHub->getSessions(Customer::ALDO_BAGLIO);
 
         assertEquals($sessions['elements'][0]['id'], self::A_SESSION_ID);
         assertEquals($sessions['elements'][1]['id'], 'b7a83626-e050-40c0-b77b-bf1bdd48f808');
@@ -25,7 +24,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSession()
     {
-        $session = $this->contactHub->getSession(self::MARIO_ROSSI_CUSTOMER_ID, self::A_SESSION_ID);
+        $session = $this->contactHub->getSession(Customer::ALDO_BAGLIO, self::A_SESSION_ID);
 
         assertEquals('1779d7ef-b4fb-4012-b682-225f1c638ff4', $session['value']);
     }
@@ -34,7 +33,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
     {
         $sessionId = $this->contactHub->generateSessionId();
 
-        $session = $this->contactHub->addSession(self::MARIO_ROSSI_CUSTOMER_ID, $sessionId);
+        $session = $this->contactHub->addSession(Customer::ALDO_BAGLIO, $sessionId);
 
         assertEquals($sessionId, $session['value']);
         return $session;
@@ -45,6 +44,6 @@ class SessionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteSession($session)
     {
-        $this->contactHub->deleteSession(self::MARIO_ROSSI_CUSTOMER_ID, $session['id']);
+        $this->contactHub->deleteSession(Customer::ALDO_BAGLIO, $session['id']);
     }
 }

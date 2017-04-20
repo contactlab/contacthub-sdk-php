@@ -5,8 +5,6 @@ use ContactHub\SchoolType;
 
 class EducationTest extends \PHPUnit_Framework_TestCase
 {
-    const MARIO_ROSSI_CUSTOMER_ID = 'be02ac64-4d66-4756-93fc-a9e4955db639';
-
     use ContactHubSetUpTrait;
 
     public function testAddEducation()
@@ -21,7 +19,7 @@ class EducationTest extends \PHPUnit_Framework_TestCase
             'isCurrent' => true
         ];
 
-        $education = $this->contactHub->addEducation(static::MARIO_ROSSI_CUSTOMER_ID, $education);
+        $education = $this->contactHub->addEducation(Customer::ALDO_BAGLIO, $education);
 
         assertEquals('SchoolConcentration', $education['schoolConcentration']);
         return $education;
@@ -34,7 +32,7 @@ class EducationTest extends \PHPUnit_Framework_TestCase
     {
         $education['schoolConcentration'] = 'NewSchoolConcentration';
 
-        $education = $this->contactHub->updateEducation(static::MARIO_ROSSI_CUSTOMER_ID, $education);
+        $education = $this->contactHub->updateEducation(Customer::ALDO_BAGLIO, $education);
 
         assertEquals('NewSchoolConcentration', $education['schoolConcentration']);
         return $education;
@@ -45,6 +43,6 @@ class EducationTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteEducation($education)
     {
-        $this->contactHub->deleteEducation(static::MARIO_ROSSI_CUSTOMER_ID, $education['id']);
+        $this->contactHub->deleteEducation(Customer::ALDO_BAGLIO, $education['id']);
     }
 }
