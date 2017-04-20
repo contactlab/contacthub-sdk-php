@@ -3,6 +3,10 @@ namespace ContactHub;
 
 use Ramsey\Uuid\Uuid;
 
+/**
+ * ContactHub contains method for interact with ContactHub Apis
+ * @package ContactHub
+ */
 class ContactHub
 {
     /**
@@ -17,6 +21,7 @@ class ContactHub
 
     /**
      * ContactHub constructor.
+     * 
      * @param string $token
      * @param string $workspaceId
      * @param string $nodeId
@@ -28,8 +33,10 @@ class ContactHub
     }
 
     /**
+     * Gets list of customers
+     *
      * @param GetCustomersOptions $options
-     * @return string
+     * @return array
      */
     public function getCustomers(GetCustomersOptions $options = null)
     {
@@ -39,6 +46,8 @@ class ContactHub
     }
 
     /**
+     * Gets details of customer
+     *
      * @param string $customerId
      * @return array
      */
@@ -48,6 +57,8 @@ class ContactHub
     }
 
     /**
+     * Create a new customer
+     *
      * @param array $customer
      * @return array
      */
@@ -58,6 +69,8 @@ class ContactHub
     }
 
     /**
+     * Modify customer
+     *
      * @param string $customerId
      * @param array $customer
      * @return array
@@ -70,6 +83,8 @@ class ContactHub
     }
 
     /**
+     * Delete customer
+     *
      * @param string $customerId
      * @return array
      */
@@ -79,6 +94,8 @@ class ContactHub
     }
 
     /**
+     * Modifies partially the customer
+     *
      * @param string $customerId
      * @param array $customer
      * @return array
@@ -89,6 +106,8 @@ class ContactHub
     }
 
     /**
+     * Add a new tag to customer
+     *
      * @param string $customerId
      * @param string $tag
      * @return array
@@ -101,6 +120,8 @@ class ContactHub
     }
 
     /**
+     * Delete tag from customer
+     *
      * @param string $customerId
      * @param string $tag
      * @return array
@@ -113,6 +134,8 @@ class ContactHub
     }
 
     /**
+     * Create customer education
+     *
      * @param string $customerId
      * @param array $education
      * @return array
@@ -123,6 +146,8 @@ class ContactHub
     }
 
     /**
+     * Modify customer education
+     *
      * @param string $customerId
      * @param string $educationId
      * @param array $education
@@ -135,6 +160,8 @@ class ContactHub
     }
 
     /**
+     * Delete customer education
+     *
      * @param string $customerId
      * @param string $educationId
      * @return array
@@ -145,6 +172,8 @@ class ContactHub
     }
 
     /**
+     * Gets list of session assign to customer
+     *
      * @param string $customerId
      * @return array
      */
@@ -154,6 +183,8 @@ class ContactHub
     }
 
     /**
+     * Gets a specific sessions assigned at customer
+     *
      * @param string $customerId
      * @param string $sessionId
      * @return array
@@ -164,6 +195,8 @@ class ContactHub
     }
 
     /**
+     * Generate session id
+     *
      * @return string
      */
     public function generateSessionId()
@@ -172,6 +205,8 @@ class ContactHub
     }
 
     /**
+     * Create a session of customer
+     *
      * @param string $customerId
      * @param string $sessionId
      * @return array
@@ -182,6 +217,8 @@ class ContactHub
     }
 
     /**
+     * Delete a session of customer
+     *
      * @param string $customerId
      * @param string $sessionId
      * @return array
@@ -192,6 +229,8 @@ class ContactHub
     }
 
     /**
+     * Create customer like
+     *
      * @param string $customerId
      * @param array $like
      * @return array
@@ -202,6 +241,8 @@ class ContactHub
     }
 
     /**
+     * Modify customer like
+     *
      * @param string $customerId
      * @param string $likeId
      * @param array $like
@@ -214,6 +255,8 @@ class ContactHub
     }
 
     /**
+     * Delete customer like
+     *
      * @param string $customerId
      * @param string $likeId
      * @return array
