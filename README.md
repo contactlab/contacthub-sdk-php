@@ -72,6 +72,8 @@ $contactHub->addEvent('a_customer_id', $event);
 
 ### Query Builder
 ```php
+use ContactHub\ContactHub;
+use ContactHub\GetCustomersOptions;
 use ContactHub\QueryBuilder;
 use ContactHub\QueryBuilder\CombinedQuery;
 use ContactHub\QueryBuilder\Condition\AtomicCondition;
@@ -88,4 +90,9 @@ $simpleWithCompositeCondition = SimpleQuery::with(
 );
 $combined = CombinedQuery::with('OR', $simpleWithCompositeCondition, $simpleWithAtomicCondition);
 $query = QueryBuilder::createQuery($combined, 'named_query');
+
+$contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
+
+$options = GetCustomersOptions::create()->withQuery($query->build());
+$customers = $contactHub->getCustomers($options);
 ```
