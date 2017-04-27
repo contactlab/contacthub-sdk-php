@@ -1,3 +1,5 @@
+![Version beta](https://img.shields.io/badge/version-beta-0072bc.svg)
+
 # ContactHub PHP SDK
 
 PHP SDK for the ContactHub API.
