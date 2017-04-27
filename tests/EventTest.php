@@ -3,18 +3,12 @@ namespace ContactHub\Tests;
 
 use ContactHub\EventContext;
 use ContactHub\EventType;
+use ContactHub\Exception;
 use ContactHub\GetEventsOptions;
 
 class EventTest extends \PHPUnit_Framework_TestCase
 {
     use ContactHubSetUpTrait;
-
-    public function testGetEvents()
-    {
-        $events = $this->contactHub->getEvents(Customer::MARIO_ROSSI);
-
-        assertEquals(10, $events['page']['size']);
-    }
 
     public function testGetEventsWithFilter()
     {
@@ -29,7 +23,6 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateEvent()
     {
-        self::markTestSkipped('WIP: addEvent not returns event data');
         $event = [
             'type' => EventType::VIEWED_PAGE,
             'context' => EventContext::MOBILE,
@@ -39,17 +32,29 @@ class EventTest extends \PHPUnit_Framework_TestCase
             'date' => date('c')
         ];
 
-        $event = $this->contactHub->addEvent(Customer::MARIO_ROSSI, $event);
-
-        assertEquals('http://ecommerce.event.url', $event['properties']['url']);
-        return $event;
+        $this->contactHub->addEvent(Customer::MARIO_ROSSI, $event);
     }
 
     /**
      * @depends testCreateEvent
      */
-    public function testDeleteEvent(array $event)
+    public function testGetEvents()
     {
-        $this->contactHub->deleteEvent($event['id']);
+        $events = $this->contactHub->getEvents(Customer::MARIO_ROSSI);
+
+        assertEquals(10, $events['page']['size']);
+        return $events['elements'];
+    }
+
+    /**
+     * @depends testGetEvents
+     */
+    public function testDeleteEvent(array $events)
+    {
+        array_walk($events, function ($event) {
+            try {
+                $this->contactHub->deleteEvent($event['id']);
+            } catch (Exception $e) { }
+        });
     }
 }
