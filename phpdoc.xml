@@ -12,5 +12,7 @@
     </transformations>
     <files>
         <file>./src/ContactHub.php</file>
+        <file>./src/GetCustomersOptions.php</file>
+        <file>./src/GetEventsOptions.php</file>
     </files>
 </phpdoc>

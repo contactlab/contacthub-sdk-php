@@ -1,6 +1,10 @@
 <?php
 namespace ContactHub;
 
+/**
+ * ParametersBuilder for filter Customers
+ * @package ContactHub
+ */
 class GetCustomersOptions
 {
     private $externalId;
@@ -10,6 +14,9 @@ class GetCustomersOptions
     private $direction = '';
     private $page;
 
+    /**
+     * @return GetCustomersOptions
+     */
     public static function create()
     {
         return new static();

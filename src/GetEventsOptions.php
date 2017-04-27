@@ -1,6 +1,10 @@
 <?php
 namespace ContactHub;
 
+/**
+ * ParametersBuilder for filter Events
+ * @package ContactHub
+ */
 class GetEventsOptions
 {
     private $eventType;
@@ -10,6 +14,9 @@ class GetEventsOptions
     private $dateTo;
     private $page;
 
+    /**
+     * @return GetEventsOptions
+     */
     public static function create()
     {
         return new static();
@@ -74,6 +81,10 @@ class GetEventsOptions
         return $this;
     }
 
+    /**
+     * @param integer $page
+     * @return $this
+     */
     public function withPage($page)
     {
         $this->page = (integer) $page;

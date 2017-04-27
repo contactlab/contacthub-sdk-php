@@ -29,6 +29,23 @@
     * [getEvents](#getevents)
     * [addEvent](#addevent)
     * [deleteEvent](#deleteevent)
+* [GetCustomersOptions](#getcustomersoptions)
+    * [create](#create)
+    * [withExternalId](#withexternalid)
+    * [withFields](#withfields)
+    * [withQuery](#withquery)
+    * [withSortBy](#withsortby)
+    * [withPage](#withpage)
+    * [getParams](#getparams)
+* [GetEventsOptions](#geteventsoptions)
+    * [create](#create-1)
+    * [withType](#withtype)
+    * [withContext](#withcontext)
+    * [withMode](#withmode)
+    * [withDateFrom](#withdatefrom)
+    * [withDateTo](#withdateto)
+    * [withPage](#withpage-1)
+    * [toParams](#toparams)
 
 ## ContactHub
 
@@ -628,6 +645,331 @@ ContactHub::deleteEvent( string $eventId ): array
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$eventId` | **string** |  |
+
+
+
+
+---
+
+## GetCustomersOptions
+
+ParametersBuilder for filter Customers
+
+
+
+* Full name: \ContactHub\GetCustomersOptions
+
+
+### create
+
+
+
+```php
+GetCustomersOptions::create(  ): \ContactHub\GetCustomersOptions
+```
+
+
+
+* This method is **static**.
+
+
+
+---
+
+### withExternalId
+
+
+
+```php
+GetCustomersOptions::withExternalId( string $externalId ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$externalId` | **string** |  |
+
+
+
+
+---
+
+### withFields
+
+
+
+```php
+GetCustomersOptions::withFields( array $fields ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$fields` | **array** |  |
+
+
+
+
+---
+
+### withQuery
+
+
+
+```php
+GetCustomersOptions::withQuery( array $query ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$query` | **array** |  |
+
+
+
+
+---
+
+### withSortBy
+
+
+
+```php
+GetCustomersOptions::withSortBy( string $field, string $direction = null ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$field` | **string** |  |
+| `$direction` | **string** |  |
+
+
+
+
+---
+
+### withPage
+
+
+
+```php
+GetCustomersOptions::withPage( integer $page ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$page` | **integer** |  |
+
+
+
+
+---
+
+### getParams
+
+
+
+```php
+GetCustomersOptions::getParams(  ): array
+```
+
+
+
+
+
+
+
+---
+
+## GetEventsOptions
+
+ParametersBuilder for filter Events
+
+
+
+* Full name: \ContactHub\GetEventsOptions
+
+
+### create
+
+
+
+```php
+GetEventsOptions::create(  ): \ContactHub\GetEventsOptions
+```
+
+
+
+* This method is **static**.
+
+
+
+---
+
+### withType
+
+
+
+```php
+GetEventsOptions::withType( string $eventType ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$eventType` | **string** |  |
+
+
+
+
+---
+
+### withContext
+
+
+
+```php
+GetEventsOptions::withContext( string $eventContext ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$eventContext` | **string** |  |
+
+
+
+
+---
+
+### withMode
+
+
+
+```php
+GetEventsOptions::withMode( string $eventMode ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$eventMode` | **string** |  |
+
+
+
+
+---
+
+### withDateFrom
+
+
+
+```php
+GetEventsOptions::withDateFrom( \DateTime $dateFrom ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$dateFrom` | **\DateTime** |  |
+
+
+
+
+---
+
+### withDateTo
+
+
+
+```php
+GetEventsOptions::withDateTo( \DateTime $dateTo ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$dateTo` | **\DateTime** |  |
+
+
+
+
+---
+
+### withPage
+
+
+
+```php
+GetEventsOptions::withPage( integer $page ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$page` | **integer** |  |
+
+
+
+
+---
+
+### toParams
+
+
+
+```php
+GetEventsOptions::toParams(  ): array
+```
+
+
+
 
 
 
