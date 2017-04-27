@@ -22,6 +22,10 @@ $options = GetCustomersOptions::create()
 $customers = $contactHub->getCustomers($options);
 ```
 
+### Documentation
+
+Documentation can be found in the the [docs](docs) directory.
+
 ### Query Builder
 ```php
 use ContactHub\QueryBuilder;
