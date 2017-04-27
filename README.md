@@ -8,10 +8,15 @@ PHP SDK for the ContactHub API.
 composer require contactlab/contacthub
 ```
 
+## Documentation
+
+Documentation can be found in the the [docs](docs) directory.
+
 ## Quick start
+
+### Create customer
 ```php
 use ContactHub\ContactHub;
-use ContactHub\GetCustomersOptions;
 
 $contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
 
@@ -32,6 +37,14 @@ $customer = [
     'enabled' => true
 ];
 $contactHub->addCustomer($customer);
+```
+
+### Retrieve Customers
+```php
+use ContactHub\ContactHub;
+use ContactHub\GetCustomersOptions;
+
+$contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
 
 $options = GetCustomersOptions::create()
     ->withExternalId('58ede74e05d14')
@@ -39,11 +52,25 @@ $options = GetCustomersOptions::create()
 $customers = $contactHub->getCustomers($options);
 ```
 
-## Documentation
+### Create Event
+```php
+use ContactHub\ContactHub;
 
-Documentation can be found in the the [docs](docs) directory.
+$contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
 
-## Query Builder
+$event = [
+    'type' => EventType::VIEWED_PAGE,
+    'context' => EventContext::MOBILE,
+    'properties' => [
+        'url' => 'http://ecommerce.event.url'
+    ],
+    'date' => date('c')
+];
+
+$contactHub->addEvent('a_customer_id', $event);
+```
+
+### Query Builder
 ```php
 use ContactHub\QueryBuilder;
 use ContactHub\QueryBuilder\CombinedQuery;
