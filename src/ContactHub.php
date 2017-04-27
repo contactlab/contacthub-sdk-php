@@ -21,10 +21,17 @@ class ContactHub
 
     /**
      * ContactHub constructor.
+     *
+     * **Example:**
+     * ```php
+     * $contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
+     * ```
+     *
+     * @link https://hub.contactlab.it/#/settings/sources
      * 
-     * @param string $token
-     * @param string $workspaceId
-     * @param string $nodeId
+     * @param string $token User token
+     * @param string $workspaceId Workspace id
+     * @param string $nodeId Node id
      */
     public function __construct($token, $workspaceId, $nodeId)
     {

@@ -47,19 +47,25 @@ ContactHub constructor.
 ContactHub::__construct( string $token, string $workspaceId, string $nodeId )
 ```
 
-
+**Example:**
+```php
+$contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
+```
 
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$token` | **string** |  |
-| `$workspaceId` | **string** |  |
-| `$nodeId` | **string** |  |
+| `$token` | **string** | User token |
+| `$workspaceId` | **string** | Workspace id |
+| `$nodeId` | **string** | Node id |
 
 
 
+**See Also:**
+
+* https://hub.contactlab.it/#/settings/sources 
 
 ---
 

@@ -9,12 +9,29 @@ composer require contactlab/contacthub
 ```
 
 ## Quick start
-
 ```php
 use ContactHub\ContactHub;
 use ContactHub\GetCustomersOptions;
 
 $contactHub = new ContactHub('TOKEN', 'WORKSPACE_ID', 'NODE_ID');
+
+$customer = [
+    'externalId' => 'externalId',
+    'base' => [
+        'firstName' => 'First Name',
+        'lastName' => 'Lastddd Name',
+        'contacts' => [
+            'email' => 'email@example.com'
+        ]
+    ],
+    'extra' => 'extra string',
+    'tags' => [
+        'auto' => ['autotag'],
+        'manual' => ['manualtag']
+    ],
+    'enabled' => true
+];
+$contactHub->addCustomer($customer);
 
 $options = GetCustomersOptions::create()
     ->withExternalId('58ede74e05d14')
