@@ -1,7 +1,9 @@
 # ContactHub PHP SDK
 
 [![Build Status](https://travis-ci.org/contactlab/contacthub-sdk-php.svg?branch=master)](https://travis-ci.org/contactlab/contacthub-sdk-php)
-![Version beta](https://img.shields.io/badge/version-beta-0072bc.svg)
+[![Latest Stable Version](https://poser.pugx.org/contactlab/contacthub-sdk-php/v/stable)](https://packagist.org/packages/contactlab/contacthub-sdk-php)
+[![Total Downloads](https://poser.pugx.org/contactlab/contacthub-sdk-php/downloads)](https://packagist.org/packages/contactlab/contacthub-sdk-php)
+[![License](https://poser.pugx.org/contactlab/contacthub-sdk-php/license)](https://packagist.org/packages/contactlab/contacthub-sdk-php)
 
 PHP SDK for the ContactHub API.
 
