@@ -1,6 +1,9 @@
 language: php
 php:
-  - 5.6
-  - 7.0
-  - 7.1
+- 5.6
+- 7.0
+- 7.1
 install: composer install
+notifications:
+  slack:
+    secure: HI+fbfJjxaBsuBoMcxz0KnAXqYTFmJxwSq7um+iTs6+q6leJhD3tENMYQX2bdntyelDbnDZoQfBeuV05hJxxvjvZrIVT3pZ0XoWmtkS1zsHeeAWSrdV9MTMtoanaCG8LtGm7RK2j++LC2cwb+hhg6aK5GW0ndG5BcYeSxYxfiNSLhTluwq8lIXQJfZ7YcfBo64qGMYQTjEhvEvzp7duV+ddNqBLGDqjIp8IjdFbeTZnOlfgfaxMdywAXoWyvRScbuvWTDOqmQLd0s/rH19q6Zo+WHzewzPotqFUUKX/LmInnhBbgRVCPtoRx4d3dix6F2/eSWE3q/ssv7dkfE2B7sl8N0fF5M9Q7li2JN5pY+sM4wRh7zdVBcJYczcWM1BU7UcgTg39lvt2+aQyYlCDrTb57fhFrTT/V2hOP/mfOGJdvNIWb7HeOBl+kYR8NgbUBJGm3974qfd2Ybvrh2tbWlTvyBdDhIL13AOxc7eCrhhw4IS6jysor67zqj0Ufl9zI3DDsjr7/NK5lxr+WtqwM+wO5GwmL0rAQTYiN8gusY9A+c7gXlmieHM/3V8A2+4sszUZ/xt0WUdjMez1KhMykN5PTSXPppUZI52m06k6iirObZR9lAtlEHiTZrxtTe8jV4G4ZsvnKCZ35ezCBSGensZX8niMBkSPLpFe5On42/vA=
