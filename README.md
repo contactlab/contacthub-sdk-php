@@ -10,7 +10,7 @@ PHP SDK for the ContactHub API.
 ## Installation
 
 ```sh
-composer require contactlab/contacthub
+composer require contactlab/contacthub-sdk-php
 ```
 
 ## Documentation
