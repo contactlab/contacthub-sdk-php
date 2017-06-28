@@ -12,7 +12,7 @@ class SimpleQueryTest extends \PHPUnit_Framework_TestCase
 
         $expected = [
             'type' => 'simple',
-            'are' => ['fake_condition']
+            'are' => [ 'condition' => ['fake_condition'] ]
         ];
 
         assertEquals($expected, $query->build());

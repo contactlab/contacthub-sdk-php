@@ -31,30 +31,34 @@ class ExampleQueryTest extends \PHPUnit_Framework_TestCase
                     [
                         'type' => 'simple',
                         'are' => [
-                            'type' => 'composite',
-                            'conjunction' => 'OR',
-                            'conditions' => [
-                                [
-                                    'type' => 'atomic',
-                                    'attribute' => 'base.lastName',
-                                    'operator' => 'IS',
-                                    'value' => 'Giovanni'
-                                ],
-                                [
-                                    'type' => 'atomic',
-                                    'attribute' => 'base.lastName',
-                                    'operator' => 'IS',
-                                    'value' => 'Giacomo'
-                                ],
+                            'condition' => [
+                                'type' => 'composite',
+                                'conjunction' => 'OR',
+                                'conditions' => [
+                                    [
+                                        'type' => 'atomic',
+                                        'attribute' => 'base.lastName',
+                                        'operator' => 'IS',
+                                        'value' => 'Giovanni'
+                                    ],
+                                    [
+                                        'type' => 'atomic',
+                                        'attribute' => 'base.lastName',
+                                        'operator' => 'IS',
+                                        'value' => 'Giacomo'
+                                    ],
+                                ]
                             ]
                         ]
                     ],
                     [
                         'type' => 'simple',
                         'are' => [
-                            'type' => 'atomic',
-                            'attribute' => 'firstName',
-                            'operator' => 'IS_NOT_NULL'
+                            'condition' => [
+                                'type' => 'atomic',
+                                'attribute' => 'firstName',
+                                'operator' => 'IS_NOT_NULL'
+                            ]
                         ]
                     ]
                 ]

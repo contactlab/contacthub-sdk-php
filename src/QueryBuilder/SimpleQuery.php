@@ -25,7 +25,9 @@ class SimpleQuery implements Query
     {
         return [
             'type' => 'simple',
-            'are' => $this->condition->build()
+            'are' => [
+                'condition' => $this->condition->build()
+            ]
         ];
     }
 }
