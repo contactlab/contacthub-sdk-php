@@ -64,4 +64,11 @@ class GetCustomersOptionsTest extends \PHPUnit_Framework_TestCase
 
         assertEquals(['page' => 2], $this->options->getParams());
     }
+
+    public function testSize()
+    {
+        $this->options->withSize(10);
+
+        assertEquals(['size' => 10], $this->options->getParams());
+    }
 }

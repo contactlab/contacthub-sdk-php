@@ -13,6 +13,7 @@ class GetCustomersOptions
     private $sortBy = '';
     private $direction = '';
     private $page;
+    private $size;
 
     /**
      * @return GetCustomersOptions
@@ -53,6 +54,16 @@ class GetCustomersOptions
     }
 
     /**
+     * @param int $size
+     * @return $this
+     */
+    public function withSize($size)
+    {
+        $this->size = $size;
+        return $this;
+    }
+
+    /**
      * @param string $field
      * @param string $direction
      * @return $this
@@ -87,7 +98,8 @@ class GetCustomersOptions
             'fields' => implode(',', $this->fields),
             'query' => $this->queryToJson(),
             'sort' => implode(',', array_filter([$this->sortBy, $this->direction])),
-            'page' => $this->page
+            'page' => $this->page,
+            'size' => $this->size
         ]);
     }
 
