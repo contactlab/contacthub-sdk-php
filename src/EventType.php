@@ -25,9 +25,10 @@ final class EventType
     const EVENT_DECLINED = 'eventDeclined';
     const EVENT_ELIGIBLE = 'eventEligible';
     const EVENT_INVITED = 'eventInvited';
-    const EVENT_NOT_SHOW = 'eventNotShow';
+    const EVENT_NO_SHOW = 'eventNoShow';
     const EVENT_NOT_INVITED = 'eventNotInvited';
     const EVENT_PARTICIPATED = 'eventParticipated';
+    const EVENT_REGISTERED = 'eventRegistered';
     const FORM_COMPILED = 'formCompiled';
     const GENERIC_ACTIVE_EVENT = 'genericActiveEvent';
     const GENERIC_PASSIVE_EVENT = 'genericPassiveEvent';
