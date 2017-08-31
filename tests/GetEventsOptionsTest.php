@@ -66,7 +66,7 @@ class GetEventsOptionsTest extends \PHPUnit_Framework_TestCase
     public function testWithDateFrom()
     {
         $filter = GetEventsOptions::create()
-            ->withDateFrom(new \DateTime('1957-02-20'));
+            ->withDateFrom(new \DateTime('1957-02-20', new \DateTimeZone('Europe/London')));
 
         assertEquals(['dateFrom' => '1957-02-20T00:00:00+00:00'], $filter->toParams());
     }
@@ -74,9 +74,9 @@ class GetEventsOptionsTest extends \PHPUnit_Framework_TestCase
     public function testWithDateTo()
     {
         $filter = GetEventsOptions::create()
-            ->withDateTo(new \DateTime('1958-09-28'));
+            ->withDateTo(new \DateTime('1958-02-28', new \DateTimeZone('Europe/London')));
 
-        assertEquals(['dateTo' => '1958-09-28T00:00:00+00:00'], $filter->toParams());
+        assertEquals(['dateTo' => '1958-02-28T00:00:00+00:00'], $filter->toParams());
     }
 
     public function testWithPage()
