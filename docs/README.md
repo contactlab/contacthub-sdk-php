@@ -2,6 +2,10 @@
 
 ## Table of Contents
 
+* [BringBackProperties](#bringbackproperties)
+    * [fromSessionId](#fromsessionid)
+    * [fromExternalId](#fromexternalid)
+    * [toParams](#toparams)
 * [ContactHub](#contacthub)
     * [__construct](#__construct)
     * [getCustomers](#getcustomers)
@@ -27,13 +31,15 @@
     * [updateLike](#updatelike)
     * [deleteLike](#deletelike)
     * [getEvents](#getevents)
-    * [addEvent](#addevent)
+    * [addEventByCustomerId](#addeventbycustomerid)
+    * [addEventByBringBackProperties](#addeventbybringbackproperties)
     * [deleteEvent](#deleteevent)
 * [GetCustomersOptions](#getcustomersoptions)
     * [create](#create)
     * [withExternalId](#withexternalid)
     * [withFields](#withfields)
     * [withQuery](#withquery)
+    * [withSize](#withsize)
     * [withSortBy](#withsortby)
     * [withPage](#withpage)
     * [getParams](#getparams)
@@ -45,7 +51,76 @@
     * [withDateFrom](#withdatefrom)
     * [withDateTo](#withdateto)
     * [withPage](#withpage-1)
-    * [toParams](#toparams)
+    * [toParams](#toparams-1)
+
+## BringBackProperties
+
+Request object for create bring back properties
+
+
+
+* Full name: \ContactHub\BringBackProperties
+
+
+### fromSessionId
+
+
+
+```php
+BringBackProperties::fromSessionId(  $value ): \ContactHub\BringBackProperties
+```
+
+
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$value` | **** |  |
+
+
+
+
+---
+
+### fromExternalId
+
+
+
+```php
+BringBackProperties::fromExternalId(  $value ): \ContactHub\BringBackProperties
+```
+
+
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$value` | **** |  |
+
+
+
+
+---
+
+### toParams
+
+
+
+```php
+BringBackProperties::toParams(  ): array
+```
+
+
+
+
+
+
+
+---
 
 ## ContactHub
 
@@ -606,12 +681,12 @@ ContactHub::getEvents( string $customerId, \ContactHub\GetEventsOptions $options
 
 ---
 
-### addEvent
+### addEventByCustomerId
 
 Add customer event
 
 ```php
-ContactHub::addEvent( string $customerId, array $event ): array
+ContactHub::addEventByCustomerId( string $customerId, array $event ): array
 ```
 
 
@@ -622,6 +697,29 @@ ContactHub::addEvent( string $customerId, array $event ): array
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$customerId` | **string** |  |
+| `$event` | **array** |  |
+
+
+
+
+---
+
+### addEventByBringBackProperties
+
+Add customer event by bring back properties
+
+```php
+ContactHub::addEventByBringBackProperties( \ContactHub\BringBackProperties $properties, array $event ): array
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$properties` | **\ContactHub\BringBackProperties** |  |
 | `$event` | **array** |  |
 
 
@@ -736,6 +834,28 @@ GetCustomersOptions::withQuery( array $query ): $this
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `$query` | **array** |  |
+
+
+
+
+---
+
+### withSize
+
+
+
+```php
+GetCustomersOptions::withSize( integer $size ): $this
+```
+
+
+
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$size` | **integer** |  |
 
 
 
@@ -979,4 +1099,4 @@ GetEventsOptions::toParams(  ): array
 
 
 --------
-> This document was automatically generated from source code comments on 2017-04-27 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2017-08-31 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)

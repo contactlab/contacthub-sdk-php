@@ -1,4 +1,5 @@
 <?php
+
 namespace ContactHub;
 
 use Ramsey\Uuid\Uuid;
@@ -28,7 +29,7 @@ class ContactHub
      * ```
      *
      * @link https://hub.contactlab.it/#/settings/sources
-     * 
+     *
      * @param string $token User token
      * @param string $workspaceId Workspace id
      * @param string $nodeId Node id
@@ -49,6 +50,7 @@ class ContactHub
     {
         $params = is_null($options) ? [] : $options->getParams();
         $params['nodeId'] = $this->nodeId;
+
         return $this->apiClient->get('customers', $params);
     }
 
@@ -60,7 +62,7 @@ class ContactHub
      */
     public function getCustomer($customerId)
     {
-        return $this->apiClient->get('customers/' . $customerId);
+        return $this->apiClient->get('customers/'.$customerId);
     }
 
     /**
@@ -72,6 +74,7 @@ class ContactHub
     public function addCustomer(array $customer)
     {
         $customer['nodeId'] = $this->nodeId;
+
         return $this->apiClient->post('customers', $customer);
     }
 
@@ -86,7 +89,8 @@ class ContactHub
     {
         $customer['nodeId'] = $this->nodeId;
         $customer['id'] = $customerId;
-        return $this->apiClient->put('customers/' . $customerId, $customer);
+
+        return $this->apiClient->put('customers/'.$customerId, $customer);
     }
 
     /**
@@ -97,7 +101,7 @@ class ContactHub
      */
     public function deleteCustomer($customerId)
     {
-        return $this->apiClient->delete('customers/' . $customerId);
+        return $this->apiClient->delete('customers/'.$customerId);
     }
 
     /**
@@ -109,7 +113,7 @@ class ContactHub
      */
     public function patchCustomer($customerId, array $customer)
     {
-        return $this->apiClient->patch('customers/' . $customerId, $customer);
+        return $this->apiClient->patch('customers/'.$customerId, $customer);
     }
 
     /**
@@ -123,6 +127,7 @@ class ContactHub
     {
         $customer = $this->getCustomer($customerId);
         $customer = Tag::add($customer, $tag);
+
         return $this->updateCustomer($customerId, $customer);
     }
 
@@ -137,6 +142,7 @@ class ContactHub
     {
         $customer = $this->getCustomer($customerId);
         $customer = Tag::remove($customer, $tag);
+
         return $this->updateCustomer($customerId, $customer);
     }
 
@@ -149,7 +155,7 @@ class ContactHub
      */
     public function addEducation($customerId, array $education)
     {
-        return $this->apiClient->post('customers/' . $customerId . '/educations', $education);
+        return $this->apiClient->post('customers/'.$customerId.'/educations', $education);
     }
 
     /**
@@ -162,7 +168,7 @@ class ContactHub
      */
     public function updateEducation($customerId, $educationId, array $education)
     {
-        return $this->apiClient->put('customers/'.$customerId.'/educations/' . $educationId, $education);
+        return $this->apiClient->put('customers/'.$customerId.'/educations/'.$educationId, $education);
     }
 
     /**
@@ -174,7 +180,7 @@ class ContactHub
      */
     public function deleteEducation($customerId, $educationId)
     {
-        return $this->apiClient->delete('customers/' . $customerId . '/educations/' . $educationId);
+        return $this->apiClient->delete('customers/'.$customerId.'/educations/'.$educationId);
     }
 
     /**
@@ -186,7 +192,7 @@ class ContactHub
      */
     public function addJob($customerId, array $job)
     {
-        return $this->apiClient->post('customers/' . $customerId . '/jobs' , $job);
+        return $this->apiClient->post('customers/'.$customerId.'/jobs', $job);
     }
 
     /**
@@ -199,7 +205,7 @@ class ContactHub
      */
     public function updateJob($customerId, $jobId, array $job)
     {
-        return $this->apiClient->put('customers/' . $customerId . '/jobs/' . $jobId, $job);
+        return $this->apiClient->put('customers/'.$customerId.'/jobs/'.$jobId, $job);
     }
 
     /**
@@ -211,7 +217,7 @@ class ContactHub
      */
     public function deleteJob($customerId, $jobId)
     {
-        return $this->apiClient->delete('customers/' . $customerId . '/jobs/' . $jobId);
+        return $this->apiClient->delete('customers/'.$customerId.'/jobs/'.$jobId);
     }
 
     /**
@@ -232,7 +238,7 @@ class ContactHub
      */
     public function getSessions($customerId)
     {
-        return $this->apiClient->get('customers/' . $customerId . '/sessions');
+        return $this->apiClient->get('customers/'.$customerId.'/sessions');
     }
 
 
@@ -245,7 +251,7 @@ class ContactHub
      */
     public function getSession($customerId, $sessionId)
     {
-        return $this->apiClient->get('customers/' . $customerId . '/sessions/' . $sessionId);
+        return $this->apiClient->get('customers/'.$customerId.'/sessions/'.$sessionId);
     }
 
     /**
@@ -257,7 +263,7 @@ class ContactHub
      */
     public function addSession($customerId, $sessionId)
     {
-        return $this->apiClient->post('customers/' . $customerId . '/sessions', ['value' => $sessionId]);
+        return $this->apiClient->post('customers/'.$customerId.'/sessions', ['value' => $sessionId]);
     }
 
     /**
@@ -269,7 +275,7 @@ class ContactHub
      */
     public function deleteSession($customerId, $sessionId)
     {
-        return $this->apiClient->delete('customers/' . $customerId . '/sessions/' . $sessionId);
+        return $this->apiClient->delete('customers/'.$customerId.'/sessions/'.$sessionId);
     }
 
     /**
@@ -281,7 +287,7 @@ class ContactHub
      */
     public function addLike($customerId, array $like)
     {
-        return $this->apiClient->post('customers/' . $customerId . '/likes' , $like);
+        return $this->apiClient->post('customers/'.$customerId.'/likes', $like);
     }
 
     /**
@@ -295,7 +301,8 @@ class ContactHub
     public function updateLike($customerId, $likeId, array $like)
     {
         $like['id'] = $likeId;
-        return $this->apiClient->put('customers/' . $customerId . '/likes/' . $likeId, $like);
+
+        return $this->apiClient->put('customers/'.$customerId.'/likes/'.$likeId, $like);
     }
 
     /**
@@ -320,7 +327,8 @@ class ContactHub
     public function getEvents($customerId, GetEventsOptions $options = null)
     {
         $params = $options ? $options->toParams() : [];
-        $params['customerId'] = (string) $customerId;
+        $params['customerId'] = (string)$customerId;
+
         return $this->apiClient->get('events', $params);
     }
 
@@ -331,20 +339,36 @@ class ContactHub
      * @param array $event
      * @return array
      */
-    public function addEvent($customerId, array $event)
+    public function addEventByCustomerId($customerId, array $event)
     {
         $event['customerId'] = $customerId;
+
+        return $this->apiClient->post('events', $event);
+    }
+
+    /**
+     * Add customer event by bring back properties
+     *
+     * @param BringBackProperties $properties
+     * @param array $event
+     * @return array
+     */
+    public function addEventByBringBackProperties(BringBackProperties $properties, array $event)
+    {
+        $event['bringBackProperties'] = $properties->toParams();
+        $event['bringBackProperties']['nodeId'] = $this->nodeId;
+
         return $this->apiClient->post('events', $event);
     }
 
     /**
      * Delete customer event
-     * 
+     *
      * @param string $eventId
      * @return array
      */
     public function deleteEvent($eventId)
     {
-        return $this->apiClient->delete('events/' . $eventId);
+        return $this->apiClient->delete('events/'.$eventId);
     }
 }

@@ -1,6 +1,8 @@
 <?php
+
 namespace ContactHub\Tests;
 
+use ContactHub\BringBackProperties;
 use ContactHub\EventContext;
 use ContactHub\EventType;
 use ContactHub\Exception;
@@ -21,28 +23,43 @@ class EventTest extends \PHPUnit_Framework_TestCase
         assertEquals('http://ecommerce.event.url', $events['elements'][0]['properties']['url']);
     }
 
-    public function testCreateEvent()
+    public function testCreateEventWithBringBackProperties()
     {
         $event = [
             'type' => EventType::VIEWED_PAGE,
             'context' => EventContext::MOBILE,
             'properties' => [
-                'url' => 'http://ecommerce.event.url'
+                'url' => 'http://ecommerce.event.url',
             ],
-            'date' => date('c')
+            'date' => date('c'),
         ];
 
-        $this->contactHub->addEvent(Customer::MARIO_ROSSI, $event);
+        $this->contactHub->addEventByBringBackProperties(BringBackProperties::fromExternalId('45'), $event);
+    }
+
+    public function testCreateEventWithCustomerId()
+    {
+        $event = [
+            'type' => EventType::VIEWED_PAGE,
+            'context' => EventContext::MOBILE,
+            'properties' => [
+                'url' => 'http://ecommerce.event.url',
+            ],
+            'date' => date('c'),
+        ];
+
+        $this->contactHub->addEventByCustomerId(Customer::MARIO_ROSSI, $event);
     }
 
     /**
-     * @depends testCreateEvent
+     * @depends testCreateEventWithCustomerId
      */
     public function testGetEvents()
     {
         $events = $this->contactHub->getEvents(Customer::MARIO_ROSSI);
 
         assertEquals(10, $events['page']['size']);
+
         return $events['elements'];
     }
 
@@ -51,10 +68,14 @@ class EventTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteEvent(array $events)
     {
-        array_walk($events, function ($event) {
-            try {
-                $this->contactHub->deleteEvent($event['id']);
-            } catch (Exception $e) { }
-        });
+        array_walk(
+            $events,
+            function ($event) {
+                try {
+                    $this->contactHub->deleteEvent($event['id']);
+                } catch (Exception $e) {
+                }
+            }
+        );
     }
 }

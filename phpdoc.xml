@@ -8,11 +8,12 @@
         <target>docs</target>
     </transformer>
     <transformations>
-        <template name="vendor/cvuorinen/phpdoc-markdown-public/data/templates/markdown-public" />
+        <template name="vendor/cvuorinen/phpdoc-markdown-public/data/templates/markdown-public"/>
     </transformations>
     <files>
         <file>./src/ContactHub.php</file>
         <file>./src/GetCustomersOptions.php</file>
         <file>./src/GetEventsOptions.php</file>
+        <file>./src/BringBackProperties.php</file>
     </files>
 </phpdoc>
