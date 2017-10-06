@@ -72,7 +72,7 @@ $event = [
     'date' => date('c')
 ];
 
-$contactHub->addEvent('a_customer_id', $event);
+$contactHub->addEventByCustomerId('a_customer_id', $event);
 ```
 
 ### Query Builder
