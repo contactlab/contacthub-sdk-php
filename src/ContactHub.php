@@ -371,4 +371,16 @@ class ContactHub
     {
         return $this->apiClient->delete('events/'.$eventId);
     }
+    
+    /**
+     * Update customer event
+     *
+     * @param string $eventId
+     * @param array $event
+     * @return array
+     */
+    public function updateEventByEventId($eventId, array $event)
+    {
+        return $this->apiClient->put('events/'.$eventId, $event);
+    }
 }
